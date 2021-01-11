@@ -66,7 +66,7 @@ Port= ${TINC_PORT}
 _EOF_
 
 # 设置路由
-cat > /etc/tinc/"${NETNAME}"/tinc-up <<_EOF_
+cat > /etc/tinc/${NETNAME}/tinc-up <<_EOF_
 #!/bin/sh
 ip link set ${INTERFACE} up mtu 1500
 ip -6 link set ${INTERFACE} up mtu 1500
