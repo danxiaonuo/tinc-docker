@@ -14,9 +14,9 @@ tinc -n danxiaonuo init ${NODE}
 # 设置 tinc.conf 文件
 cat > /etc/tinc/"${NETNAME}"/tinc.conf<<-'EOF'
 #对应节点主机名字
-Name = ${NODE}
+Name = "${NODE}"
 #网卡名称
-Interface = ${NETNAME}
+Interface = "${NETNAME}"
 #Mode 有三种模式，分别是<router|switch|hub> (router) ,相对应我们平时使用到的路由、交换机、集线器 (默认模式 router)
 Mode = switch 
 #数据包压缩级别
@@ -41,7 +41,7 @@ Broadcast = mst
 # 目前, 本地发现机制是通过在 UDP 发现阶段发送本地地址的方式
 LocalDiscovery = yes
 # 服务器私钥的位置
-PrivateKeyFile = /etc/tinc/danxiaonuo/rsa_key.priv
+PrivateKeyFile = /etc/tinc/"${NETNAME}"/rsa_key.priv
 EOF
 
 # 设置主动连接节点
@@ -54,32 +54,32 @@ done
 # 设置hosts文件
 cat > /etc/tinc/"${NETNAME}"/hosts/"${NODE}"<<-'EOF'
 #公网IP地址
-Address = ${PUBLIC_IP}
+Address = "${PUBLIC_IP}"
 #定义tinc内网网段
-Subnet= ${PRIVATE_IPV4}/32
-Subnet= ${PRIVATE_IPV6}/128
+Subnet= "${PRIVATE_IPV4}"/32
+Subnet= "${PRIVATE_IPV6}"/128
 #路由器内网网段
 Subnet= 0.0.0.0/0
 Subnet= ::/0
 #监听端口
-Port= ${TINC_PORT}
+Port= "${TINC_PORT}"
 EOF
 
 # 设置路由
 cat > /etc/tinc/"${NETNAME}"/tinc-up<<-'EOF'
 #!/bin/sh
-ip link set ${INTERFACE} up mtu 1500
-ip -6 link set ${INTERFACE} up mtu 1500
-ip addr add ${PRIVATE_IPV4}/24 dev ${INTERFACE}
-ip -6 addr add ${PRIVATE_IPV6}/64 dev ${INTERFACE}
+ip link set "${INTERFACE}" up mtu 1500
+ip -6 link set "${INTERFACE}" up mtu 1500
+ip addr add "${PRIVATE_IPV4}"/24 dev ${INTERFACE}
+ip -6 addr add "${PRIVATE_IPV6}"/64 dev ${INTERFACE}
 EOF
 
 cat > /etc/tinc/"${NETNAME}"/tinc-down<<-'EOF'
 #!/bin/sh
-ip route del ${PRIVATE_IPV4}/24 dev ${INTERFACE}
-ip -6 route del ${PRIVATE_IPV6}/64 dev ${INTERFACE}
-ip link set ${INTERFACE} down
-ip -6 link set ${INTERFACE} dow
+ip route del "${PRIVATE_IPV4}"/24 dev ${INTERFACE}
+ip -6 route del "${PRIVATE_IPV6}"/64 dev ${INTERFACE}
+ip link set "${INTERFACE}" down
+ip -6 link set "${INTERFACE}" dow
 EOF
 
 # 设置文件权限
@@ -96,9 +96,9 @@ tinc join ${TOKEN}
 # 设置 tinc.conf 文件
 cat > /etc/tinc/"${NETNAME}"/tinc.conf<<-'EOF'
 #对应节点主机名字
-Name = ${NODE}
+Name = "${NODE}"
 #网卡名称
-Interface = ${NETNAME}
+Interface = "${NETNAME}"
 #Mode 有三种模式，分别是<router|switch|hub> (router) ,相对应我们平时使用到的路由、交换机、集线器 (默认模式 router)
 Mode = switch 
 #数据包压缩级别
@@ -123,7 +123,7 @@ Broadcast = mst
 # 目前, 本地发现机制是通过在 UDP 发现阶段发送本地地址的方式
 LocalDiscovery = yes
 # 服务器私钥的位置
-PrivateKeyFile = /etc/tinc/danxiaonuo/rsa_key.priv
+PrivateKeyFile = /etc/tinc/"${NETNAME}"/rsa_key.priv
 EOF
 
 # 设置主动连接节点
@@ -136,30 +136,30 @@ done
 # 设置hosts文件
 cat > /etc/tinc/"${NETNAME}"/hosts/"${NODE}"<<-'EOF'
 #定义tinc内网网段
-Subnet= ${PRIVATE_IPV4}/32
-Subnet= ${PRIVATE_IPV6}/128
+Subnet= "${PRIVATE_IPV4}"/32
+Subnet= "${PRIVATE_IPV6}"/128
 #路由器内网网段
 Subnet= 0.0.0.0/0
 Subnet= ::/0
 #监听端口
-Port= ${TINC_PORT}
+Port= "${TINC_PORT}"
 EOF
 
 # 设置路由
 cat > /etc/tinc/"${NETNAME}"/tinc-up<<-'EOF'
 #!/bin/sh
-ip link set ${INTERFACE} up mtu 1500
-ip -6 link set ${INTERFACE} up mtu 1500
-ip addr add ${PRIVATE_IPV4}/24 dev ${INTERFACE}
-ip -6 addr add ${PRIVATE_IPV6}/64 dev ${INTERFACE}
+ip link set "${INTERFACE}" up mtu 1500
+ip -6 link set "${INTERFACE}" up mtu 1500
+ip addr add "${PRIVATE_IPV4}"/24 dev "${INTERFACE}"
+ip -6 addr add "${PRIVATE_IPV6}"/64 dev "${INTERFACE}"
 EOF
 
 cat > /etc/tinc/"${NETNAME}"/tinc-down<<-'EOF'
 #!/bin/sh
-ip route del ${PRIVATE_IPV4}/24 dev ${INTERFACE}
-ip -6 route del ${PRIVATE_IPV6}/64 dev ${INTERFACE}
-ip link set ${INTERFACE} down
-ip -6 link set ${INTERFACE} dow
+ip route del "${PRIVATE_IPV4}"/24 dev "${INTERFACE}"
+ip -6 route del ${PRIVATE_IPV6}/64 dev "${INTERFACE}"
+ip link set "${INTERFACE}" down
+ip -6 link set "${INTERFACE}" dow
 EOF
 
 # 设置文件权限
