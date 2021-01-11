@@ -1,7 +1,7 @@
 ##########################################
 #         构建基础镜像                   #
 ##########################################
-FROM alpine:edge
+FROM alpine:latest
 # 作者描述信息
 MAINTAINER danxiaonuo
 # 时区设置
@@ -16,7 +16,7 @@ ARG DOCKER_IMAGE=danxiaonuo/strongswan
 ENV DOCKER_IMAGE=$DOCKER_IMAGE
 ARG DOCKER_IMAGE_OS=alpine
 ENV DOCKER_IMAGE_OS=$DOCKER_IMAGE_OS
-ARG DOCKER_IMAGE_TAG=edge
+ARG DOCKER_IMAGE_TAG=latest
 ENV DOCKER_IMAGE_TAG=$DOCKER_IMAGE_TAG
 ARG BUILD_DATE
 ENV BUILD_DATE=$BUILD_DATE
@@ -79,9 +79,8 @@ RUN set -eux \
 
 # 安装 TINC
 RUN set -eux \
-    cd /tmp && \
     wget --no-check-certificate http://www.tinc-vpn.org/packages/tinc-${TINC_VERSION}.tar.gz -O /tmp/tinc-${TINC_VERSION}.tar.gz && \
-    tar zxvf tinc-${TINC_VERSION}.tar.gz && cd tinc-${TINC_VERSION} && \
+    cd /tmp && tar zxvf tinc-${TINC_VERSION}.tar.gz && cd tinc-${TINC_VERSION} && \
     ./configure --prefix=/opt/tinc --sysconfdir=/etc --disable-lzo --enable-jumbograms --enable-tunemu && \
     make -j$(($(nproc)+1)) && \
     make -j$(($(nproc)+1)) install && \
