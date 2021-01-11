@@ -3,6 +3,9 @@
 # initialize server profile
 #
 
+# 创建 tinc 目录
+mkdir -p /etc/tinc/${NETNAME}/hosts
+
 # 定义网络名称
 cat > /etc/tinc/nets.boot<<-'EOF'
 ${NETNAME}
