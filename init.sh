@@ -4,7 +4,7 @@
 #
 
 # 定义网络名称
-tee /etc/tinc/nets.boot<<-'EOF'
+cat > /etc/tinc/nets.boot<<-'EOF'
 ${NETNAME}
 EOF
 
