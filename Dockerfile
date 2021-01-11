@@ -108,11 +108,13 @@ RUN chmod a+x /init.sh && \
 ENV NETNAME=danxiaonuo \
     TINC_PORT=56000 \
     NODE=server     \
+    PEERS=server    \
     KEYSIZE=4096    \
     VERBOSE=2       \
     PRIVATE_IPV4=10.9.0.1 \
     PRIVATE_IPV6=2608::1  \
     PUBLIC_IP=tinc.xiaonuo.live
+    
     
 # 入口
 ENTRYPOINT ["/entrypoint.sh"]
