@@ -92,11 +92,6 @@ RUN set -eux \
     && mkdir -p /var/log/tinc \
     && rm -rf /var/cache/apk/*
     
-# 设置环境
-RUN echo ". /etc/profile" > /root/.bashrc
-RUN echo "alias ll='ls -alF'"     >> /etc/profile
-RUN echo "export PS1='\H:\w\\$ '" >> /etc/profile
-RUN echo 'export TERM="xterm"'    >> /etc/profile
 
 # 拷贝初始化脚本
 COPY init.sh /init.sh
