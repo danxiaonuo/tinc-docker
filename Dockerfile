@@ -104,5 +104,15 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod a+x /init.sh && \
     chmod a+x /entrypoint.sh
 
+ENV NETNAME=danxiaonuo \
+    TINC_PORT=56000 \
+    NODE=server     \
+    KEYSIZE=4096    \
+    VERBOSE=2
+    
+ENV PUBLIC_IP=tinc.xiaonuo.live  \
+    PRIVATE_IPV4=10.9.0.1        \
+    PRIVATE_IPV6=2608::1         \
+    
 # 入口
 ENTRYPOINT ["/entrypoint.sh"]
