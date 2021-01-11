@@ -98,3 +98,11 @@ RUN echo ". /etc/profile" > /root/.bashrc
 RUN echo "alias ll='ls -alF'"     >> /etc/profile
 RUN echo "export PS1='\H:\w\\$ '" >> /etc/profile
 RUN echo 'export TERM="xterm"'    >> /etc/profile
+
+# 拷贝初始化脚本
+COPY init.sh /init.sh
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod a+x /init.sh && \
+    chmod a+x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
