@@ -88,7 +88,7 @@ RUN set -eux \
     && apk del --no-cache --purge $BUILD_DEPS \
     && rm -rf /tmp/* \
     && mkdir -p /var/log/tinc \
-    rm -rf /var/cache/apk/*
+    && rm -rf /var/cache/apk/*
     
 # 设置环境
 RUN echo ". /etc/profile" > /root/.bashrc
