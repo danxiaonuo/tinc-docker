@@ -29,27 +29,25 @@ ENV VCS_REF=$VCS_REF
 # ***** 设置变量 *****
 
 # 构建依赖
-
 ARG BUILD_DEPS="\
     autoconf \
-	  build-base \
-	  curl \
-          wget \
-	  g++ \
-	  gcc \
-	  libc-utils \
-	  libpcap-dev \
-	  libressl \
-	  linux-headers \
-	  lzo-dev \
-	  make \
-	  ncurses-dev \
-	  openssl-dev \
-	  readline-dev \
-	  tar \
-	  zlib-dev"
+    build-base \
+    curl \
+    wget \
+    g++ \
+    gcc \
+    libc-utils \
+    libpcap-dev \
+    libressl \
+    linux-headers \
+    lzo-dev \
+    make \
+    ncurses-dev \
+    openssl-dev \
+    readline-dev \
+    tar \
+    zlib-dev"
 ENV BUILD_DEPS=$BUILD_DEPS
-
 ARG RUN_DEPS="\
     ARG RUN_DEPS="\
     ca-certificates \
