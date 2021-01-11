@@ -5,15 +5,15 @@
 
 # 定义网络名称
 tee /etc/tinc/nets.boot<<-'EOF'
-${NETWORK}
+${NETNAME}
 EOF
 
 设置 tinc.conf 文件
-cat > /etc/tinc/${NETWORK}/tinc.conf<<-'EOF'
+cat > /etc/tinc/${NETNAME}/tinc.conf<<-'EOF'
 #对应节点主机名字
 Name = ${NODE}
 #网卡名称
-Interface = /dev/net/${NETWORK} 
+Interface = /dev/net/${NETNAME} 
 #Mode 有三种模式，分别是<router|switch|hub> (router) ,相对应我们平时使用到的路由、交换机、集线器 (默认模式 router)
 Mode = switch 
 #数据包压缩级别
@@ -34,11 +34,11 @@ EOF
 peers=$(echo "$PEERS" | tr " " "\n")
 for host in $peers
 do
-    echo "ConnectTo = ""$host" >> /etc/tinc/${NETWORK}/tinc.conf
+    echo "ConnectTo = ""$host" >> /etc/tinc/${NETNAME}/tinc.conf
 done
 
 # 设置hosts文件
-cat > /etc/tinc/${NETWORK}/hosts/${NODE}<<-'EOF'
+cat > /etc/tinc/${NETNAME}/hosts/${NODE}<<-'EOF'
 #公网IP地址
 Address = ${PUBLIC_IP}
 #定义tinc内网网段
@@ -52,7 +52,7 @@ Port= ${TINC_PORT}
 EOF
 
 # 设置路由
-cat > /etc/tinc/${NETWORK}/tinc-up<<-'EOF'
+cat > /etc/tinc/${NETNAME}/tinc-up<<-'EOF'
 #!/bin/sh
 ip link set \$INTERFACE up mtu 1500
 ip -6 link set \$INTERFACE up mtu 1500
@@ -61,7 +61,7 @@ ip -6 addr add ${PRIVATE_IPV6}/64 dev \$INTERFACE
 ip -6 route add default via ${PRIVATE_IPV6}
 EOF
 
-cat > /etc/tinc/${NETWORK}/tinc-down<<-'EOF'
+cat > /etc/tinc/${NETNAME}/tinc-down<<-'EOF'
 #!/bin/sh
 ip route del ${PRIVATE_IPV4}/24 dev $INTERFACE
 ip -6 route del ${PRIVATE_IPV6}/64 dev $INTERFACE
@@ -71,6 +71,6 @@ ip -6 link set $INTERFACE dow
 EOF
 
 # 生成 RSA 公钥和私钥
-tincd -n ${NETWORK} -K${KEYSIZE}
+tincd -n ${NETNAME} -K${KEYSIZE}
 # 设置文件权限
-chmod -R 775 /etc/tinc/${NETWORK}/tinc-*
+chmod -R 775 /etc/tinc/${NETNAME}/tinc-*
