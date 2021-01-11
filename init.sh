@@ -13,7 +13,7 @@ cat > /etc/tinc/${NETWORK}/tinc.conf<<-'EOF'
 #对应节点主机名字
 Name = ${NODE}
 #网卡名称
-Interface = danxiaonuo 
+Interface = /dev/net/${NETWORK} 
 #Mode 有三种模式，分别是<router|switch|hub> (router) ,相对应我们平时使用到的路由、交换机、集线器 (默认模式 router)
 Mode = switch 
 #数据包压缩级别
