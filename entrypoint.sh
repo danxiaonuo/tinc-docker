@@ -5,5 +5,5 @@
 exec tinc --net=${NETNAME} start \
           --no-detach \
           --debug=${VERBOSE} \
-		  --logfile=/var/log/tinc.${NETNAME}.log \
+	  --logfile=/var/log/tinc.${NETNAME}.log \
            "$@"
