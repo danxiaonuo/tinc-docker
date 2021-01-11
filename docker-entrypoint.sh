@@ -8,7 +8,7 @@ then
     mknod /dev/net/${NETWORK} c 10 200
 fi
 
-if [[ $RUNMODE != server ]]
+if [[ $NODE != server ]]
 then
    sed -i -e '/公网IP地址/d' -e '/Address/d' /etc/tinc/${NETWORK}/hosts/${NODE} 
 fi
