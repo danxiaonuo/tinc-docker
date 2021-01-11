@@ -85,7 +85,7 @@ RUN set -eux \
     && make -j$(($(nproc)+1)) \
     && make -j$(($(nproc)+1)) install \
     && ln -sf /opt/tinc/sbin/tincd /usr/bin/tincd \
-    && apk del --no-cache --purge $BUILD_DEP \
+    && apk del --no-cache --purge $BUILD_DEPS \
     && rm -rf /tmp/* \
     && mkdir -p /var/log/tinc \
     rm -rf /var/cache/apk/*
