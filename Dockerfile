@@ -105,4 +105,5 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod a+x /init.sh && \
     chmod a+x /entrypoint.sh
 
+# 入口
 ENTRYPOINT ["/entrypoint.sh"]
