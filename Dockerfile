@@ -79,10 +79,8 @@ RUN set -eux \
 
 # 安装 TINC
 RUN set -eux \
-    && mkdir -p /tmp/tinc && cd /tmp \
-    #&& curl http://www.tinc-vpn.org/packages/tinc-${TINC_VERSION}.tar.gz | tar xzvf - --strip 1 -C /tmp/tinc  \
-    && wget --no-check-certificate http://www.tinc-vpn.org/packages/tinc-${TINC_VERSION}.tar.gz -O /tmp/tinc-${TINC_VERSION}.tar.gz | tar xzvf - --strip 1 -C /tmp/tinc \
-    && cd /tmp/tinc \
+    && wget --no-check-certificate http://www.tinc-vpn.org/packages/tinc-${TINC_VERSION}.tar.gz -O /tmp/tinc-${TINC_VERSION}.tar.gz \
+    && cd /tmp/ && tar -zxvf tinc-${TINC_VERSION}.tar.gz && cd /tmp/tinc-${TINC_VERSION}/ \
     && ./configure --prefix=/opt/tinc --sysconfdir=/etc --disable-lzo --enable-jumbograms --enable-tunemu \
     && make -j$(($(nproc)+1)) \
     && make -j$(($(nproc)+1)) install \
