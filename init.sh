@@ -12,11 +12,11 @@ mkdir -pv /etc/tinc && mkdir -pv /opt/tinc/var/run/
 tinc -n danxiaonuo init ${NODE}
 
 # 设置 tinc.conf 文件
-cat > /etc/tinc/"${NETNAME}"/tinc.conf<<-'EOF'
+cat > /etc/tinc/${NETNAME}/tinc.conf <<_EOF_
 #对应节点主机名字
-Name = "${NODE}"
+Name = ${NODE}
 #网卡名称
-Interface = "${NETNAME}"
+Interface = ${NETNAME}
 #Mode 有三种模式，分别是<router|switch|hub> (router) ,相对应我们平时使用到的路由、交换机、集线器 (默认模式 router)
 Mode = switch 
 #数据包压缩级别
@@ -41,8 +41,8 @@ Broadcast = mst
 # 目前, 本地发现机制是通过在 UDP 发现阶段发送本地地址的方式
 LocalDiscovery = yes
 # 服务器私钥的位置
-PrivateKeyFile = /etc/tinc/"${NETNAME}"/rsa_key.priv
-EOF
+PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
+_EOF_
 
 # 设置主动连接节点
 peers=$(echo "$PEERS" | tr " " "\n")
@@ -52,38 +52,38 @@ do
 done
 
 # 设置hosts文件
-cat > /etc/tinc/"${NETNAME}"/hosts/"${NODE}"<<-'EOF'
+cat >> /etc/tinc/${NETNAME}/hosts/${NODE} <<_EOF_
 #公网IP地址
-Address = "${PUBLIC_IP}"
+Address = ${PUBLIC_IP}
 #定义tinc内网网段
-Subnet= "${PRIVATE_IPV4}"/32
-Subnet= "${PRIVATE_IPV6}"/128
+Subnet= ${PRIVATE_IPV4}/32
+Subnet= ${PRIVATE_IPV6}/128
 #路由器内网网段
 Subnet= 0.0.0.0/0
 Subnet= ::/0
 #监听端口
-Port= "${TINC_PORT}"
-EOF
+Port= ${TINC_PORT}
+_EOF_
 
 # 设置路由
-cat > /etc/tinc/"${NETNAME}"/tinc-up<<-'EOF'
+cat > /etc/tinc/"${NETNAME}"/tinc-up <<_EOF_
 #!/bin/sh
-ip link set "${INTERFACE}" up mtu 1500
-ip -6 link set "${INTERFACE}" up mtu 1500
-ip addr add "${PRIVATE_IPV4}"/24 dev ${INTERFACE}
-ip -6 addr add "${PRIVATE_IPV6}"/64 dev ${INTERFACE}
-EOF
+ip link set ${INTERFACE} up mtu 1500
+ip -6 link set ${INTERFACE} up mtu 1500
+ip addr add ${PRIVATE_IPV4}/24 dev ${INTERFACE}
+ip -6 addr add ${PRIVATE_IPV6}/64 dev ${INTERFACE}
+_EOF_
 
-cat > /etc/tinc/"${NETNAME}"/tinc-down<<-'EOF'
+cat > /etc/tinc/"${NETNAME}"/tinc-down <<_EOF_
 #!/bin/sh
-ip route del "${PRIVATE_IPV4}"/24 dev ${INTERFACE}
-ip -6 route del "${PRIVATE_IPV6}"/64 dev ${INTERFACE}
-ip link set "${INTERFACE}" down
-ip -6 link set "${INTERFACE}" dow
-EOF
+ip route del ${PRIVATE_IPV4}/24 dev ${INTERFACE}
+ip -6 route del ${PRIVATE_IPV6}/64 dev ${INTERFACE}
+ip link set ${INTERFACE} down
+ip -6 link set ${INTERFACE} dow
+_EOF_
 
 # 设置文件权限
-chmod -R 775 /etc/tinc/"${NETNAME}"/tinc-*
+chmod -R 775 /etc/tinc/${NETNAME}/tinc-*
 
 elif [[ $RUNMODE = client ]]; then
 
@@ -94,11 +94,11 @@ mkdir -pv /etc/tinc && mkdir -pv /opt/tinc/var/run/
 tinc join ${TOKEN}
 
 # 设置 tinc.conf 文件
-cat > /etc/tinc/"${NETNAME}"/tinc.conf<<-'EOF'
+cat > /etc/tinc/${NETNAME}/tinc.conf <<_EOF_
 #对应节点主机名字
-Name = "${NODE}"
+Name = ${NODE}
 #网卡名称
-Interface = "${NETNAME}"
+Interface = ${NETNAME}
 #Mode 有三种模式，分别是<router|switch|hub> (router) ,相对应我们平时使用到的路由、交换机、集线器 (默认模式 router)
 Mode = switch 
 #数据包压缩级别
@@ -123,8 +123,8 @@ Broadcast = mst
 # 目前, 本地发现机制是通过在 UDP 发现阶段发送本地地址的方式
 LocalDiscovery = yes
 # 服务器私钥的位置
-PrivateKeyFile = /etc/tinc/"${NETNAME}"/rsa_key.priv
-EOF
+PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
+_EOF_
 
 # 设置主动连接节点
 peers=$(echo "$PEERS" | tr " " "\n")
@@ -134,35 +134,35 @@ do
 done
 
 # 设置hosts文件
-cat > /etc/tinc/"${NETNAME}"/hosts/"${NODE}"<<-'EOF'
+cat >> /etc/tinc/${NETNAME}/hosts/${NODE} <<_EOF_
 #定义tinc内网网段
-Subnet= "${PRIVATE_IPV4}"/32
-Subnet= "${PRIVATE_IPV6}"/128
+Subnet= ${PRIVATE_IPV4}/32
+Subnet= ${PRIVATE_IPV6}/128
 #路由器内网网段
 Subnet= 0.0.0.0/0
 Subnet= ::/0
 #监听端口
-Port= "${TINC_PORT}"
-EOF
+Port= ${TINC_PORT}
+_EOF_
 
 # 设置路由
-cat > /etc/tinc/"${NETNAME}"/tinc-up<<-'EOF'
+cat > /etc/tinc/${NETNAME}/tinc-up <<_EOF_
 #!/bin/sh
-ip link set "${INTERFACE}" up mtu 1500
-ip -6 link set "${INTERFACE}" up mtu 1500
-ip addr add "${PRIVATE_IPV4}"/24 dev "${INTERFACE}"
-ip -6 addr add "${PRIVATE_IPV6}"/64 dev "${INTERFACE}"
-EOF
+ip link set ${INTERFACE} up mtu 1500
+ip -6 link set ${INTERFACE} up mtu 1500
+ip addr add ${PRIVATE_IPV4}/24 dev ${INTERFACE}
+ip -6 addr add ${PRIVATE_IPV6}/64 dev ${INTERFACE}
+_EOF_
 
-cat > /etc/tinc/"${NETNAME}"/tinc-down<<-'EOF'
+cat > /etc/tinc/${NETNAME}/tinc-down <<_EOF_
 #!/bin/sh
-ip route del "${PRIVATE_IPV4}"/24 dev "${INTERFACE}"
-ip -6 route del ${PRIVATE_IPV6}/64 dev "${INTERFACE}"
-ip link set "${INTERFACE}" down
-ip -6 link set "${INTERFACE}" dow
-EOF
+ip route del ${PRIVATE_IPV4}/24 dev ${INTERFACE}
+ip -6 route del ${PRIVATE_IPV6}/64 dev ${INTERFACE}
+ip link set ${INTERFACE} down
+ip -6 link set ${INTERFACE} dow
+_EOF_
 
 # 设置文件权限
-chmod -R 775 /etc/tinc/"${NETNAME}"/tinc-*
+chmod -R 775 /etc/tinc/${NETNAME}/tinc-*
 
 fi
