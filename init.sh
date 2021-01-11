@@ -11,7 +11,7 @@ cat > /etc/tinc/nets.boot<<-'EOF'
 ${NETNAME}
 EOF
 
-设置 tinc.conf 文件
+# 设置 tinc.conf 文件
 cat > /etc/tinc/${NETNAME}/tinc.conf<<-'EOF'
 #对应节点主机名字
 Name = ${NODE}
