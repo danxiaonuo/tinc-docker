@@ -34,7 +34,7 @@ ARG BUILD_DEPS="\
     autoconf \
 	  build-base \
 	  curl \
-    wget \
+          wget \
 	  g++ \
 	  gcc \
 	  libc-utils \
@@ -53,13 +53,13 @@ ENV BUILD_DEPS=$BUILD_DEPS
 ARG RUN_DEPS="\
     ARG RUN_DEPS="\
     ca-certificates \
-	  git \
-	  libcrypto1.1 \
-	  libpcap \
-	  lzo \
-	  openssl \
-	  readline \
-	  zlib"
+    git \ 
+    libcrypto1.1 \
+    libpcap \
+    lzo \
+    openssl \
+    readline \
+    zlib"
 ENV RUN_DEPS=$RUN_DEPS
 
 # TINC
@@ -88,6 +88,7 @@ RUN set -eux \
     ./configure --prefix=/opt/tinc --sysconfdir=/etc --disable-lzo --enable-jumbograms --enable-tunemu && \
     make -j$(($(nproc)+1)) && \
     make -j$(($(nproc)+1)) install && \
+    ln -sf /opt/tinc/sbin/tincd /usr/bin/tincd && \
     apk del --no-cache --purge $BUILD_DEP && \
     rm -rf /tmp/* && \
     mkdir -p /var/log/tinc && \
