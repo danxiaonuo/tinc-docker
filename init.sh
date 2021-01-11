@@ -51,6 +51,7 @@ Subnet= ::/0
 Port= ${TINC_PORT}
 EOF
 
+# 设置路由
 cat > /etc/tinc/${NETWORK}/tinc-up<<-'EOF'
 #!/bin/sh
 ip link set \$INTERFACE up mtu 1500
