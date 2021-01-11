@@ -19,9 +19,11 @@ Mode = switch
 #数据包压缩级别
 Compression = 11 
 #加密类型
-Cipher  = aes-256-cbc 
-#rsa 加密协议强度
-Digest = sha256 
+Cipher  = id-aes256-GCM 
+#rsa加密协议强度
+Digest = whirlpool
+# MAC长度
+MACLength = 16
 #MTU值
 PMTU = 1500
 #服务器私钥的位置
