@@ -72,7 +72,7 @@ ip addr add ${PRIVATE_IPV4}/24 dev ${INTERFACE}
 ip -6 addr add ${PRIVATE_IPV6}/64 dev ${INTERFACE}
 EOF
 
-cat > /etc/tinc/"${NETNAME}"/tinc-down <<_EOF_
+cat > /etc/tinc/"${NETNAME}"/tinc-down <<-'EOF'
 #!/bin/sh
 ip route del ${PRIVATE_IPV4}/24 dev ${INTERFACE}
 ip -6 route del ${PRIVATE_IPV6}/64 dev ${INTERFACE}
@@ -152,7 +152,7 @@ ip addr add ${PRIVATE_IPV4}/24 dev ${INTERFACE}
 ip -6 addr add ${PRIVATE_IPV6}/64 dev ${INTERFACE}
 EOF
 
-cat > /etc/tinc/${NETNAME}/tinc-down <<_EOF_
+cat > /etc/tinc/${NETNAME}/tinc-down <<-'EOF'
 #!/bin/sh
 ip route del ${PRIVATE_IPV4}/24 dev ${INTERFACE}
 ip -6 route del ${PRIVATE_IPV6}/64 dev ${INTERFACE}
