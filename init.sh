@@ -1,7 +1,5 @@
 #!/bin/sh -e
-#
-# initialize server profile
-#
+
 
 if [[ $RUNMODE = server ]]; then
 
@@ -12,7 +10,7 @@ mkdir -pv /etc/tinc && mkdir -pv /opt/tinc/var/run/
 tinc -n danxiaonuo init ${NODE}
 
 # 设置 tinc.conf 文件
-cat > /etc/tinc/${NETNAME}/tinc.conf <<_EOF_
+cat > /etc/tinc/${NETNAME}/tinc.conf <<-'EOF'
 #对应节点主机名字
 Name = ${NODE}
 #网卡名称
@@ -42,7 +40,7 @@ Broadcast = mst
 LocalDiscovery = yes
 # 服务器私钥的位置
 PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
-_EOF_
+EOF
 
 # 设置主动连接节点
 peers=$(echo "$PEERS" | tr " " "\n")
@@ -52,7 +50,7 @@ do
 done
 
 # 设置hosts文件
-cat >> /etc/tinc/${NETNAME}/hosts/${NODE} <<_EOF_
+cat >> /etc/tinc/${NETNAME}/hosts/${NODE} <<-'EOF'
 #公网IP地址
 Address = ${PUBLIC_IP}
 #定义tinc内网网段
@@ -63,16 +61,16 @@ Subnet= 0.0.0.0/0
 Subnet= ::/0
 #监听端口
 Port= ${TINC_PORT}
-_EOF_
+EOF
 
 # 设置路由
-cat > /etc/tinc/${NETNAME}/tinc-up <<_EOF_
+cat > /etc/tinc/${NETNAME}/tinc-up <<-'EOF'
 #!/bin/sh
 ip link set ${INTERFACE} up mtu 1500
 ip -6 link set ${INTERFACE} up mtu 1500
 ip addr add ${PRIVATE_IPV4}/24 dev ${INTERFACE}
 ip -6 addr add ${PRIVATE_IPV6}/64 dev ${INTERFACE}
-_EOF_
+EOF
 
 cat > /etc/tinc/"${NETNAME}"/tinc-down <<_EOF_
 #!/bin/sh
@@ -80,7 +78,7 @@ ip route del ${PRIVATE_IPV4}/24 dev ${INTERFACE}
 ip -6 route del ${PRIVATE_IPV6}/64 dev ${INTERFACE}
 ip link set ${INTERFACE} down
 ip -6 link set ${INTERFACE} dow
-_EOF_
+EOF
 
 # 设置文件权限
 chmod -R 775 /etc/tinc/${NETNAME}/tinc-*
@@ -94,7 +92,7 @@ mkdir -pv /etc/tinc && mkdir -pv /opt/tinc/var/run/
 tinc join ${TOKEN}
 
 # 设置 tinc.conf 文件
-cat > /etc/tinc/${NETNAME}/tinc.conf <<_EOF_
+cat > /etc/tinc/${NETNAME}/tinc.conf <<-'EOF'
 #对应节点主机名字
 Name = ${NODE}
 #网卡名称
@@ -124,7 +122,7 @@ Broadcast = mst
 LocalDiscovery = yes
 # 服务器私钥的位置
 PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
-_EOF_
+EOF
 
 # 设置主动连接节点
 peers=$(echo "$PEERS" | tr " " "\n")
@@ -134,7 +132,7 @@ do
 done
 
 # 设置hosts文件
-cat >> /etc/tinc/${NETNAME}/hosts/${NODE} <<_EOF_
+cat >> /etc/tinc/${NETNAME}/hosts/${NODE} <<-'EOF'
 #定义tinc内网网段
 Subnet= ${PRIVATE_IPV4}/32
 Subnet= ${PRIVATE_IPV6}/128
@@ -143,16 +141,16 @@ Subnet= 0.0.0.0/0
 Subnet= ::/0
 #监听端口
 Port= ${TINC_PORT}
-_EOF_
+EOF
 
 # 设置路由
-cat > /etc/tinc/${NETNAME}/tinc-up <<_EOF_
+cat > /etc/tinc/${NETNAME}/tinc-up <<-'EOF'
 #!/bin/sh
 ip link set ${INTERFACE} up mtu 1500
 ip -6 link set ${INTERFACE} up mtu 1500
 ip addr add ${PRIVATE_IPV4}/24 dev ${INTERFACE}
 ip -6 addr add ${PRIVATE_IPV6}/64 dev ${INTERFACE}
-_EOF_
+EOF
 
 cat > /etc/tinc/${NETNAME}/tinc-down <<_EOF_
 #!/bin/sh
@@ -160,7 +158,7 @@ ip route del ${PRIVATE_IPV4}/24 dev ${INTERFACE}
 ip -6 route del ${PRIVATE_IPV6}/64 dev ${INTERFACE}
 ip link set ${INTERFACE} down
 ip -6 link set ${INTERFACE} dow
-_EOF_
+EOF
 
 # 设置文件权限
 chmod -R 775 /etc/tinc/${NETNAME}/tinc-*
