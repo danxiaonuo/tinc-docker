@@ -1,0 +1,53 @@
+version: '3.9'
+
+services:
+  tinc:
+    tty: true
+    restart: always
+    image: danxiaonuo/tinc
+    container_name: tinc
+    hostname: tinc
+    privileged: true
+    cap_add:
+     - ALL
+    volumes:
+      # 配置目录与文件
+      - ./conf/tinc/data:/etc/tinc:rw,cached
+      - ./conf/tinc/logs:/opt/tinc/var/log:rw,cached
+      # 同步宿主机时区与时间
+      - /usr/share/zoneinfo:/usr/share/zoneinfo:ro,cached
+      - /etc/localtime:/etc/localtime:ro,cached
+      # 共享内核
+      - /lib/modules:/lib/modules:ro,cached
+      - /etc/sysctl.conf:/etc/sysctl.conf:ro,cached
+    environment:
+      # 选择服务端与客户端(server or client)
+      - RUNMODE=server
+      # 节点名称
+      - NODE=server01
+      # 网络接口名称
+      - NETNAME=danxiaonuo
+      # 网卡名称
+      - INTERFACE=danxiaonuo
+      # 设置主动连接节点
+      - PEERS=server01
+      # 连接服务端地址
+      - PUBLIC_IP=tinc.xiaonuo.live
+      # 连接服务端TOKEN
+      #- TOKEN=
+      # 私有IPV4地址
+      - PRIVATE_IPV4=10.9.0.1
+      # 私有IPV6地址
+      - PRIVATE_IPV6=2608::1
+      # TINC端口
+      - TINC_PORT=56000
+      # DEBUG等级
+      - VERBOSE=2
+    devices:
+      - /dev/net/tun
+    network_mode: "host"
+    ulimits:
+      nproc: 65535
+      nofile:
+          soft: 65535
+          hard: 65535
