@@ -1,15 +1,28 @@
 version: '3.9'
 
-services:
+
+# 服务名
   tinc:
+    # 模拟一个伪终端
     tty: true
-    restart: always
-    image: danxiaonuo/tinc
-    container_name: tinc
+    # 打开标准输入,可以接受外部输入
+    stdin_open: true
+    # 主机名
     hostname: tinc
+    # 指定容器名称
+    container_name: tinc
+    # 指定为镜像名称或镜像ID
+    image: danxiaonuo/tinc:latest
+    # 覆盖容器启动后默认执行的命令
+    # command: /sbin/init
+    # 允许容器中运行一些特权命令
     privileged: true
+    # 指定容器退出后的重启策略为始终重启
+    restart: always
+    # 指定容器的内核能力(capacity)分配
     cap_add:
      - ALL
+    # 数据卷所挂载路径设置
     volumes:
       # 配置目录与文件
       - ./conf/tinc/data:/etc/tinc:rw,cached
@@ -43,9 +56,12 @@ services:
       - TINC_PORT=56000
       # DEBUG等级
       - VERBOSE=2
+    # 指定设备映射关系
     devices:
       - /dev/net/tun
+    # 配置容器连接的网络
     network_mode: "host"
+    # 指定容器的 ulimits 限制值
     ulimits:
       nproc: 65535
       nofile:
