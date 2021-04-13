@@ -9,7 +9,7 @@ if [[ $RUNMODE == server ]]; then
 mkdir -pv /etc/tinc && mkdir -pv /opt/tinc/var/run/
 
 # 初始化服务端节点
-tinc -n danxiaonuo init ${NODE} > /tmp/TOKEN
+tinc -n danxiaonuo init ${NODE}
 
 # 设置 tinc.conf 文件
 cat >/etc/tinc/${NETNAME}/tinc.conf <<_EOF_
