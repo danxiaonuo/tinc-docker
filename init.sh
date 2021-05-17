@@ -71,6 +71,7 @@ ip link set ${INTERFACE} up mtu 1500
 ip -6 link set ${INTERFACE} up mtu 1500
 ip addr add ${PRIVATE_IPV4}/24 dev ${INTERFACE}
 ip -6 addr add ${PRIVATE_IPV6}/64 dev ${INTERFACE}
+ip -6 route add default via ${PRIVATE_IPV6}
 _EOF_
 
 cat >/etc/tinc/"${NETNAME}"/tinc-down <<_EOF_
@@ -158,6 +159,7 @@ ip link set ${INTERFACE} up mtu 1500
 ip -6 link set ${INTERFACE} up mtu 1500
 ip addr add ${PRIVATE_IPV4}/24 dev ${INTERFACE}
 ip -6 addr add ${PRIVATE_IPV6}/64 dev ${INTERFACE}
+ip -6 route add default via ${PRIVATE_IPV6}
 _EOF_
 
 cat >/etc/tinc/${NETNAME}/tinc-down <<_EOF_
