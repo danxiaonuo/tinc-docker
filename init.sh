@@ -100,9 +100,6 @@ then
 # 创建 tinc 目录
 mkdir -pv /etc/tinc && mkdir -pv /opt/tinc/var/run/
 
-# 连接服务端
-tinc join ${TOKEN}
-
 # 设置 tinc.conf 文件
 cat >/etc/tinc/${NETNAME}/tinc.conf <<_EOF_
 #对应节点主机名字
@@ -177,6 +174,9 @@ _EOF_
 # 设置文件权限
 chmod +x /etc/tinc/"${NETNAME}"/tinc-up
 chmod +x /etc/tinc/"${NETNAME}"/tinc-down
+
+# 连接服务端
+tinc join ${TOKEN}
 
 	fi
 
