@@ -49,7 +49,7 @@ services:
       # 连接服务端TOKEN
       #- TOKEN=
       # 私有IPV4地址
-      - PRIVATE_IPV4=10.9.0.1
+      - PRIVATE_IPV4=10.18.0.1
       # 私有IPV6地址
       - PRIVATE_IPV6=2608::1
       # TINC端口
