@@ -100,9 +100,6 @@ then
 # 创建 tinc 目录
 mkdir -pv /etc/tinc/"${NETNAME}"/hosts && mkdir -pv /opt/tinc/var/run
 
-# 生成密钥
-tinc -n ${NODE} generate-ed22519-keys >/dev/null 2>&1
-
 # 设置 tinc.conf 文件
 cat >/etc/tinc/${NETNAME}/tinc.conf <<_EOF_
 #对应节点主机名字
@@ -178,6 +175,8 @@ _EOF_
 chmod +x /etc/tinc/"${NETNAME}"/tinc-up
 chmod +x /etc/tinc/"${NETNAME}"/tinc-down
 
+# 生成密钥
+tinc -n ${NODE} generate-ed22519-keys >/dev/null 2>&1
 
 	fi
 
