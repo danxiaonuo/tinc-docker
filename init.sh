@@ -176,7 +176,7 @@ chmod +x /etc/tinc/"${NETNAME}"/tinc-up
 chmod +x /etc/tinc/"${NETNAME}"/tinc-down
 
 # 连接服务端
-tinc join ${TOKEN}
+tinc join ${TOKEN} || exit
 
 	fi
 
