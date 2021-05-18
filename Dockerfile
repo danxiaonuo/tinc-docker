@@ -32,6 +32,7 @@ ENV VCS_REF=$VCS_REF
 ARG BUILD_DEPS="\
     automake \
     autoconf \
+    texinfo \
     build-base \
     curl \
     wget \
