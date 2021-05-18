@@ -5,11 +5,11 @@ if [[ $RUNMODE == server ]]; then
 	### 检测配置是否存在
 	if [ ! -f /etc/tinc/"${NETNAME}"/hosts/"${NODE}" ]; then
 
-# 创建 tinc 目录
-mkdir -pv /etc/tinc && mkdir -pv /opt/tinc/var/run/
+		# 创建 tinc 目录
+		mkdir -pv /etc/tinc && mkdir -pv /opt/tinc/var/run/
 
-# 初始化服务端节点
-tinc -n danxiaonuo init ${NODE} >/dev/null 2>&1
+		# 初始化服务端节点
+		tinc -n danxiaonuo init ${NODE} >/dev/null 2>&1
 
 # 设置 tinc.conf 文件
 cat >/etc/tinc/${NETNAME}/tinc.conf <<_EOF_
@@ -46,11 +46,11 @@ PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
 ExperimentalProtocol = no
 _EOF_
 
-# 设置主动连接节点
-peers=$(echo "$PEERS" | tr " " "\n")
-for host in $peers; do
-	echo "ConnectTo = ""$host" >>/etc/tinc/"${NETNAME}"/tinc.conf
-done
+		# 设置主动连接节点
+		peers=$(echo "$PEERS" | tr " " "\n")
+		for host in $peers; do
+			echo "ConnectTo = ""$host" >>/etc/tinc/"${NETNAME}"/tinc.conf
+		done
 
 # 设置hosts文件
 cat >>/etc/tinc/${NETNAME}/hosts/${NODE} <<_EOF_
@@ -97,8 +97,8 @@ then
 	### 检测配置是否存在
 	if [ ! -f /etc/tinc/"${NETNAME}"/hosts/"${NODE}" ]; then
 
-# 创建 tinc 目录
-mkdir -pv /etc/tinc && mkdir -pv /opt/tinc/var/run/
+		# 创建 tinc 目录
+		mkdir -pv /etc/tinc/${NETNAME}/hosts && mkdir -pv /opt/tinc/var/run
 
 # 设置 tinc.conf 文件
 cat >/etc/tinc/${NETNAME}/tinc.conf <<_EOF_
@@ -135,11 +135,11 @@ PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
 ExperimentalProtocol = no
 _EOF_
 
-# 设置主动连接节点
-peers=$(echo "$PEERS" | tr " " "\n")
-for host in $peers; do
-	echo "ConnectTo = ""$host" >>/etc/tinc/"${NETNAME}"/tinc.conf
-done
+		# 设置主动连接节点
+		peers=$(echo "$PEERS" | tr " " "\n")
+		for host in $peers; do
+			echo "ConnectTo = ""$host" >>/etc/tinc/"${NETNAME}"/tinc.conf
+		done
 
 # 设置hosts文件
 cat >>/etc/tinc/${NETNAME}/hosts/${NODE} <<_EOF_
@@ -171,12 +171,12 @@ ip link set ${INTERFACE} down
 ip -6 link set ${INTERFACE} dow
 _EOF_
 
-# 设置文件权限
-chmod +x /etc/tinc/"${NETNAME}"/tinc-up
-chmod +x /etc/tinc/"${NETNAME}"/tinc-down
+		# 设置文件权限
+		chmod +x /etc/tinc/"${NETNAME}"/tinc-up
+		chmod +x /etc/tinc/"${NETNAME}"/tinc-down
 
-# 连接服务端
-tinc join ${TOKEN} >/dev/null 2>&1 || exit
+		# 连接服务端
+		tinc join ${TOKEN} >/dev/null 2>&1 || exit
 
 	fi
 
