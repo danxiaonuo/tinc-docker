@@ -98,9 +98,9 @@ then
 	if [ ! -f /etc/tinc/"${NETNAME}"/hosts/"${NODE}" ]; then
 
 # 创建 tinc 目录
-mkdir -pv /etc/tinc && mkdir -pv /opt/tinc/var/run
+mkdir -pv /etc/tinc/"${NETNAME}"/hosts && mkdir -pv /opt/tinc/var/run
 
-# 初始化客户端端节点
+# 生成密钥
 tinc -n ${NODE} generate-ed22519-keys >/dev/null 2>&1
 
 # 设置 tinc.conf 文件
