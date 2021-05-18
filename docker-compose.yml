@@ -46,8 +46,6 @@ services:
       - PEERS=server01
       # 连接服务端地址
       - PUBLIC_IP=tinc.xiaonuo.live
-      # 连接服务端TOKEN
-      #- TOKEN=
       # 私有IPV4地址
       - PRIVATE_IPV4=10.18.0.1
       # 私有IPV6地址
