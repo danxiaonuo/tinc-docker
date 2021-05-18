@@ -80,8 +80,8 @@ RUN set -eux \
 
 # 安装 TINC
 # 克隆源码运行安装
-RUN git clone --depth=1 -b ${TAGS} --progress https://github.com/gsliepen/tinc.git /src && \
-    cd /src && ./configure --prefix=/opt/tinc --sysconfdir=/etc --disable-lzo --enable-jumbograms --enable-tunemu \
+RUN git clone --depth=1 -b ${TAGS} --progress https://github.com/gsliepen/tinc.git /src  \
+    && cd /src && ./configure --prefix=/opt/tinc --sysconfdir=/etc --disable-lzo --enable-jumbograms --enable-tunemu \
     && ./configure --prefix=/opt/tinc --sysconfdir=/etc --disable-lzo --enable-jumbograms --enable-tunemu \
     && make -j$(($(nproc)+1)) \
     && make -j$(($(nproc)+1)) install \
