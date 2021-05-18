@@ -60,8 +60,9 @@ ARG RUN_DEPS="\
 ENV RUN_DEPS=$RUN_DEPS
 
 # TINC
-ARG TINC_VERSION="1.1pre17"
-ENV TINC_VERSION=$TINC_VERSION
+# 版本号
+ARG TAGS=1.1
+ENV TAGS=$TAGS
 
 # 修改源地址
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
@@ -78,9 +79,9 @@ RUN set -eux \
    && echo ${TZ} > /etc/timezone
 
 # 安装 TINC
-RUN set -eux \
-    && wget --no-check-certificate http://www.tinc-vpn.org/packages/tinc-${TINC_VERSION}.tar.gz -O /tmp/tinc-${TINC_VERSION}.tar.gz \
-    && cd /tmp/ && tar -zxvf tinc-${TINC_VERSION}.tar.gz && cd /tmp/tinc-${TINC_VERSION}/ \
+# 克隆源码运行安装
+RUN git clone --depth=1 -b ${TAGS} --progress https://github.com/gsliepen/tinc.git /src && \
+    cd /src && ./configure --prefix=/opt/tinc --sysconfdir=/etc --disable-lzo --enable-jumbograms --enable-tunemu \
     && ./configure --prefix=/opt/tinc --sysconfdir=/etc --disable-lzo --enable-jumbograms --enable-tunemu \
     && make -j$(($(nproc)+1)) \
     && make -j$(($(nproc)+1)) install \
@@ -88,7 +89,7 @@ RUN set -eux \
     && ln -sf /opt/tinc/sbin/tinc /usr/bin/tinc \
     && mkdir -pv /etc/tinc && mkdir -pv /opt/tinc/var/run && mkdir -pv /opt/tinc/var/log \
     && apk del --no-cache --purge $BUILD_DEPS \
-    && rm -rf /tmp/* \
+    && rm -rf /tmp/* /src \
     && mkdir -p /var/log/tinc \
     && rm -rf /var/cache/apk/*
     
