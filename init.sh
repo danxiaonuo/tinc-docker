@@ -42,6 +42,8 @@ Broadcast = mst
 LocalDiscovery = yes
 # 服务器私钥的位置
 PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
+# 控制SPTPS协议的配置
+ExperimentalProtocol = no
 _EOF_
 
 # 设置主动连接节点
@@ -132,6 +134,8 @@ Broadcast = mst
 LocalDiscovery = yes
 # 服务器私钥的位置
 PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
+# 控制SPTPS协议的配置
+ExperimentalProtocol = no
 _EOF_
 
 # 设置主动连接节点
