@@ -41,7 +41,7 @@ Broadcast = mst
 # 目前, 本地发现机制是通过在 UDP 发现阶段发送本地地址的方式
 LocalDiscovery = yes
 # 服务器私钥的位置
-# PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
+PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
 # 控制SPTPS协议的配置
 ExperimentalProtocol = no
 _EOF_
@@ -130,7 +130,7 @@ Broadcast = mst
 # 目前, 本地发现机制是通过在 UDP 发现阶段发送本地地址的方式
 LocalDiscovery = yes
 # 服务器私钥的位置
-# PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
+PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
 # 控制SPTPS协议的配置
 ExperimentalProtocol = no
 _EOF_
@@ -155,7 +155,7 @@ Port= ${TINC_PORT}
 _EOF_
 
 # 生成密钥
-tinc -n ${NODE} generate-ed22519-keys >/dev/null 2>&1
+tinc -n ${NODE} generate-keys >/dev/null 2>&1
 
 # 设置路由
 cat >/etc/tinc/${NETNAME}/tinc-up <<_EOF_
