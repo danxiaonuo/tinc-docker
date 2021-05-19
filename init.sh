@@ -8,7 +8,7 @@ if [[ $RUNMODE == server ]]; then
 # 创建 tinc 目录
 mkdir -pv /etc/tinc && mkdir -pv /opt/tinc/var/run/
 
-# 初始化节点
+# 初始化服务端节点
 tinc -n danxiaonuo init ${NODE} >/dev/null 2>&1
 
 # 设置 tinc.conf 文件
@@ -41,7 +41,7 @@ Broadcast = mst
 # 目前, 本地发现机制是通过在 UDP 发现阶段发送本地地址的方式
 LocalDiscovery = yes
 # 服务器私钥的位置
-PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
+# PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
 # 控制SPTPS协议的配置
 ExperimentalProtocol = no
 _EOF_
@@ -98,10 +98,7 @@ then
 	if [ ! -f /etc/tinc/"${NETNAME}"/hosts/"${NODE}" ]; then
 
 # 创建 tinc 目录
-mkdir -pv /etc/tinc && mkdir -pv /opt/tinc/var/run/
-
-# 初始化节点
-tinc -n danxiaonuo init ${NODE} >/dev/null 2>&1
+mkdir -pv /etc/tinc/"${NETNAME}"/hosts && mkdir -pv /opt/tinc/var/run
 
 # 设置 tinc.conf 文件
 cat >/etc/tinc/${NETNAME}/tinc.conf <<_EOF_
@@ -133,7 +130,7 @@ Broadcast = mst
 # 目前, 本地发现机制是通过在 UDP 发现阶段发送本地地址的方式
 LocalDiscovery = yes
 # 服务器私钥的位置
-PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
+# PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
 # 控制SPTPS协议的配置
 ExperimentalProtocol = no
 _EOF_
@@ -143,6 +140,9 @@ peers=$(echo "$PEERS" | tr " " "\n")
 for host in $peers; do
 	echo "ConnectTo = ""$host" >>/etc/tinc/"${NETNAME}"/tinc.conf
 done
+
+# 生成密钥
+tinc -n ${NODE} generate-ed22519-keys >/dev/null 2>&1
 
 # 设置hosts文件
 cat >>/etc/tinc/${NETNAME}/hosts/${NODE} <<_EOF_
