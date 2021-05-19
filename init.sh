@@ -175,7 +175,6 @@ _EOF_
 chmod +x /etc/tinc/"${NETNAME}"/tinc-up
 chmod +x /etc/tinc/"${NETNAME}"/tinc-down
 
-
 # 生成密钥
 yes "" | tinc -n ${NETNAME} generate-ed25519-keys || exit >/dev/null 2>&1
 
