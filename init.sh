@@ -141,9 +141,8 @@ for host in $peers; do
 	echo "ConnectTo = ""$host" >>/etc/tinc/"${NETNAME}"/tinc.conf
 done
 
-
 # 生成密钥
-yes | tinc -n ${NETNAME} generate-ed22519-keys
+yes "" | tinc -n "${NETNAME}" generate-ed22519-keys
 
 # 设置hosts文件
 cat >>/etc/tinc/${NETNAME}/hosts/${NODE} <<_EOF_
