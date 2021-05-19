@@ -8,8 +8,8 @@ if [[ $RUNMODE == server ]]; then
 # 创建 tinc 目录
 mkdir -pv /etc/tinc && mkdir -pv /opt/tinc/var/run/
 
-# 初始化节点
-tinc -n danxiaonuo init ${NODE} >/dev/null 2>&1
+# 初始化服务端节点
+tinc -n ${NETNAME} init ${NODE} >/dev/null 2>&1
 
 # 设置 tinc.conf 文件
 cat >/etc/tinc/${NETNAME}/tinc.conf <<_EOF_
@@ -98,10 +98,10 @@ then
 	if [ ! -f /etc/tinc/"${NETNAME}"/hosts/"${NODE}" ]; then
 
 # 创建 tinc 目录
-mkdir -pv /etc/tinc && mkdir -pv /opt/tinc/var/run/
+mkdir -pv /etc/tinc/"${NETNAME}"/hosts && mkdir -pv /opt/tinc/var/run
 
-# 初始化节点
-tinc -n danxiaonuo init ${NODE} >/dev/null 2>&1
+# 生成密钥
+yes "" | tinc -n ${NETNAME} generate-keys >/dev/null 2>&1
 
 # 设置 tinc.conf 文件
 cat >/etc/tinc/${NETNAME}/tinc.conf <<_EOF_
