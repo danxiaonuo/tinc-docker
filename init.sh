@@ -141,6 +141,8 @@ for host in $peers; do
 	echo "ConnectTo = ""$host" >>/etc/tinc/"${NETNAME}"/tinc.conf
 done
 
+# 生成密钥
+tinc -n ${NODE} generate-keys >/dev/null 2>&1
 
 # 设置hosts文件
 cat >>/etc/tinc/${NETNAME}/hosts/${NODE} <<_EOF_
@@ -153,9 +155,6 @@ Subnet= ::/0
 #监听端口
 Port= ${TINC_PORT}
 _EOF_
-
-# 生成密钥
-tinc -n ${NODE} generate-keys >/dev/null 2>&1
 
 # 设置路由
 cat >/etc/tinc/${NETNAME}/tinc-up <<_EOF_
