@@ -100,9 +100,6 @@ then
 # 创建 tinc 目录
 mkdir -pv /etc/tinc/"${NETNAME}"/hosts && mkdir -pv /opt/tinc/var/run
 
-# 生成密钥
-yes "" | tinc -n ${NETNAME} generate-keys >/dev/null 2>&1
-
 # 设置 tinc.conf 文件
 cat >/etc/tinc/${NETNAME}/tinc.conf <<_EOF_
 #对应节点主机名字
@@ -146,7 +143,7 @@ done
 
 
 # 设置hosts文件
-cat >>/etc/tinc/${NETNAME}/hosts/${NODE} <<_EOF_
+cat >/etc/tinc/${NETNAME}/hosts/${NODE} <<_EOF_
 #定义tinc内网网段
 Subnet= ${PRIVATE_IPV4}/32
 Subnet= ${PRIVATE_IPV6}/128
@@ -156,6 +153,9 @@ Subnet= ::/0
 #监听端口
 Port= ${TINC_PORT}
 _EOF_
+
+# 生成密钥
+yes "" | tinc -n ${NETNAME} generate-ed22519-keys >/dev/null 2>&1
 
 # 设置路由
 cat >/etc/tinc/${NETNAME}/tinc-up <<_EOF_
