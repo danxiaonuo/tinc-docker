@@ -142,7 +142,7 @@ for host in $peers; do
 done
 
 # 生成密钥
-yes "" | tinc -n "${NETNAME}" generate-ed22519-keys
+yes "" | tinc -n ${NETNAME} generate-ed25519-keys >/dev/null 2>&1
 
 # 设置hosts文件
 cat >>/etc/tinc/${NETNAME}/hosts/${NODE} <<_EOF_
