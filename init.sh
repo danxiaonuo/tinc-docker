@@ -141,9 +141,6 @@ for host in $peers; do
 	echo "ConnectTo = ""$host" >>/etc/tinc/"${NETNAME}"/tinc.conf
 done
 
-# 生成密钥
-yes "" | tinc -n ${NETNAME} generate-ed25519-keys >/dev/null 2>&1
-
 # 设置hosts文件
 cat >>/etc/tinc/${NETNAME}/hosts/${NODE} <<_EOF_
 #定义tinc内网网段
@@ -177,6 +174,10 @@ _EOF_
 # 设置文件权限
 chmod +x /etc/tinc/"${NETNAME}"/tinc-up
 chmod +x /etc/tinc/"${NETNAME}"/tinc-down
+
+
+# 生成密钥
+yes "" | tinc -n ${NETNAME} generate-ed25519-keys || exit >/dev/null 2>&1
 
 	fi
 
