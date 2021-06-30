@@ -40,7 +40,7 @@ ARG BUILD_DEPS="\
     gcc \
     libc-utils \
     libpcap-dev \
-    libressl \
+    libressl-dev \
     linux-headers \
     lzo-dev \
     make \
