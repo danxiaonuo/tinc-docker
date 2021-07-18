@@ -88,3 +88,10 @@ jobs:
         password: ${{ secrets.ALIYUN_PASSWORD }}
         image_version: ${{ matrix.DOCKER_TAG }}
         docker_file: '.'
+    
+    - name: 删除旧的GitHub-workflow
+      uses: Mattraks/delete-workflow-runs@main
+      with:
+        repository: ${{ github.repository }}
+        retain_days: 1
+        keep_minimum_runs: 1    #保留多少个workflow不删除
