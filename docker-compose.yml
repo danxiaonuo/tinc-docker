@@ -51,7 +51,7 @@ services:
       # 私有IPV6地址
       - PRIVATE_IPV6=2608::1
       # TINC端口
-      - TINC_PORT=56000
+      - TINC_PORT=7688
       # DEBUG等级
       - VERBOSE=2
     # 指定设备映射关系
