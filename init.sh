@@ -13,21 +13,19 @@ tinc -n ${NETNAME} init ${NODE} >/dev/null 2>&1
 
 # 设置 tinc.conf 文件
 cat >/etc/tinc/${NETNAME}/tinc.conf <<_EOF_
-#对应节点主机名字
+# 对应节点主机名字
 Name = ${NODE}
-#网卡名称
+# 网卡名称
 Interface = ${NETNAME}
-#Mode 有三种模式，分别是<router|switch|hub> (router) ,相对应我们平时使用到的路由、交换机、集线器 (默认模式 router)
+# Mode 有三种模式，分别是<router|switch|hub> (router) ,相对应我们平时使用到的路由、交换机、集线器 (默认模式 router)
 Mode = switch 
-#数据包压缩级别
-Compression = 11 
-#加密类型
+# 加密类型
 Cipher  = id-aes256-GCM 
-#rsa加密协议强度
+# RSA加密协议强度
 Digest = whirlpool
 # MAC长度
 MACLength = 16
-#MTU值
+# MTU值
 PMTU = 1500
 # 设置广播包发到其他节点的方式, 所有节点需要使用相同的方式, 否则可能会产生路由循环
 # no 不发送广播包 
@@ -54,15 +52,15 @@ _EOF_
 
 # 设置hosts文件
 cat >>/etc/tinc/${NETNAME}/hosts/${NODE} <<_EOF_
-#公网IP地址
+# 公网IP地址
 Address = ${PUBLIC_IP}
-#定义tinc内网网段
+# 定义tinc内网网段
 Subnet= ${PRIVATE_IPV4}/32
 Subnet= ${PRIVATE_IPV6}/128
-#路由器内网网段
+# 路由器内网网段
 Subnet= 0.0.0.0/0
 Subnet= ::/0
-#监听端口
+# 监听端口
 Port= ${TINC_PORT}
 _EOF_
 
@@ -105,21 +103,19 @@ tinc -n ${NETNAME} init ${NODE} >/dev/null 2>&1
 
 # 设置 tinc.conf 文件
 cat >/etc/tinc/${NETNAME}/tinc.conf <<_EOF_
-#对应节点主机名字
+# 对应节点主机名字
 Name = ${NODE}
-#网卡名称
+# 网卡名称
 Interface = ${NETNAME}
-#Mode 有三种模式，分别是<router|switch|hub> (router) ,相对应我们平时使用到的路由、交换机、集线器 (默认模式 router)
+# Mode 有三种模式，分别是<router|switch|hub> (router) ,相对应我们平时使用到的路由、交换机、集线器 (默认模式 router)
 Mode = switch 
-#数据包压缩级别
-Compression = 11 
-#加密类型
+# 加密类型
 Cipher  = id-aes256-GCM 
-#rsa加密协议强度
+# RSA加密协议强度
 Digest = whirlpool
 # MAC长度
 MACLength = 16
-#MTU值
+# MTU值
 PMTU = 1500
 # 设置广播包发到其他节点的方式, 所有节点需要使用相同的方式, 否则可能会产生路由循环
 # no 不发送广播包 
@@ -146,13 +142,13 @@ done
 
 # 设置hosts文件
 cat >>/etc/tinc/${NETNAME}/hosts/${NODE} <<_EOF_
-#定义tinc内网网段
+# 定义tinc内网网段
 Subnet= ${PRIVATE_IPV4}/32
 Subnet= ${PRIVATE_IPV6}/128
-#路由器内网网段
+# 路由器内网网段
 Subnet= 0.0.0.0/0
 Subnet= ::/0
-#监听端口
+# 监听端口
 Port= ${TINC_PORT}
 _EOF_
 
