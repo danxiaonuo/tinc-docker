@@ -76,7 +76,7 @@ _EOF_
 
 cat >/etc/tinc/"${NETNAME}"/tinc-down <<_EOF_
 #!/bin/sh
-ip route del ${PRIVATE_IPV4}/24 dev ${INTERFACE}
+ip route del ${PRIVATE_IPV4_GW} dev ${INTERFACE}
 ip -6 route del ${PRIVATE_IPV6_GW} dev ${INTERFACE}
 ip link set ${INTERFACE} down
 ip -6 link set ${INTERFACE} dow
@@ -164,7 +164,7 @@ _EOF_
 
 cat >/etc/tinc/${NETNAME}/tinc-down <<_EOF_
 #!/bin/sh
-ip route del ${PRIVATE_IPV4}/24 dev ${INTERFACE}
+ip route del ${PRIVATE_IPV4_GW} dev ${INTERFACE}
 ip -6 route del ${PRIVATE_IPV6_GW} dev ${INTERFACE}
 ip link set ${INTERFACE} down
 ip -6 link set ${INTERFACE} dow
