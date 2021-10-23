@@ -48,6 +48,8 @@ services:
       - PUBLIC_IP=tinc.xiaonuo.live
       # 私有IPV4地址
       - PRIVATE_IPV4=10.88.0.1
+      # 私有IPV6网关
+      - PRIVATE_IPV6_GW=2088::/64
       # 私有IPV6地址
       - PRIVATE_IPV6=2088::1
       # TINC端口
