@@ -49,6 +49,7 @@ ENV BUILD_DEPS=$BUILD_DEPS
 ARG RUN_DEPS="\
     ca-certificates \
     git \ 
+    zsh \
     vim \
     libcrypto1.1 \
     libpcap \
@@ -80,7 +81,7 @@ RUN set -eux \
    # 更改为zsh
    && sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || true \
    && sed -i -e "s/bin\/ash/bin\/zsh/" /etc/passwd \
-   /bin/zsh
+   && /bin/zsh
 
 # 安装 TINC
 # 克隆源码运行安装
