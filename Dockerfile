@@ -75,11 +75,12 @@ RUN set -eux \
    && ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime \
    # 更新时间
    && echo ${TZ} > /etc/timezone \
+   # vim设置
+   && sed -i -e 's/mouse=/mouse-=/g' /usr/share/vim/vim*/defaults.vim \
    # 更改为zsh
    && sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || true \
    && sed -i -e "s/bin\/ash/bin\/zsh/" /etc/passwd \
-   && sed -i -e 's/mouse=/mouse-=/g' /usr/share/vim/vim*/defaults.vim \
-   && /bin/zsh
+   /bin/zsh
 
 # 安装 TINC
 # 克隆源码运行安装
