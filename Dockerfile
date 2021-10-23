@@ -48,6 +48,7 @@ ARG BUILD_DEPS="\
 ENV BUILD_DEPS=$BUILD_DEPS
 ARG RUN_DEPS="\
     ca-certificates \
+    iproute2 \
     git \ 
     zsh \
     vim \
