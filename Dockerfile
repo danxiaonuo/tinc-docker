@@ -18,10 +18,6 @@ ARG DOCKER_IMAGE_OS=alpine
 ENV DOCKER_IMAGE_OS=$DOCKER_IMAGE_OS
 ARG DOCKER_IMAGE_TAG=latest
 ENV DOCKER_IMAGE_TAG=$DOCKER_IMAGE_TAG
-ARG BUILD_DATE
-ENV BUILD_DATE=$BUILD_DATE
-ARG VCS_REF
-ENV VCS_REF=$VCS_REF
 
 
 # ##############################################################################
@@ -66,19 +62,23 @@ ENV RUN_DEPS=$RUN_DEPS
 ARG TAGS=1.1
 ENV TAGS=$TAGS
 
-# 修改源地址
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 # ***** 安装依赖 *****
 RUN set -eux \
-   # 更新源地址
-   && apk update \
-   # 更新系统并更新系统软件
-   && apk upgrade && apk upgrade \
-   && apk add -U --update $BUILD_DEPS $RUN_DEPS \
+   # 修改源地址
+   && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
+   # 更新源地址并更新系统软件
+   && apk update && upgrade \
+   # 安装依赖包
+   && apk add --no-cache --clean-protected $BUILD_DEPS $RUN_DEPS \
    # 更新时区
    && ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime \
    # 更新时间
    && echo ${TZ} > /etc/timezone
+   # 更改为zsh
+   && sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || true \
+   && sed -i -e "s/bin\/ash/bin\/zsh/" /etc/passwd \
+   && sed -i -e 's/mouse=/mouse-=/g' /usr/share/vim/vim*/defaults.vim \
+   && /bin/zsh
 
 # 安装 TINC
 # 克隆源码运行安装
