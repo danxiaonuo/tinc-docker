@@ -47,11 +47,11 @@ services:
       # 连接服务端地址
       - PUBLIC_IP=tinc.xiaonuo.live
       # 私有IPV4地址
-      - PRIVATE_IPV4=10.18.0.1
+      - PRIVATE_IPV4=10.6.0.1
       # 私有IPV6地址
-      - PRIVATE_IPV6=2608::1
+      - PRIVATE_IPV6=2606::1
       # TINC端口
-      - TINC_PORT=7688
+      - TINC_PORT=7666
       # DEBUG等级
       - VERBOSE=2
     # 指定设备映射关系
