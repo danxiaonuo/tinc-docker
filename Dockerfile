@@ -68,7 +68,7 @@ RUN set -eux \
    # 修改源地址
    && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
    # 更新源地址并更新系统软件
-   && apk update && upgrade \
+   && apk update && apk upgrade \
    # 安装依赖包
    && apk add --no-cache --clean-protected $BUILD_DEPS $RUN_DEPS \
    # 更新时区
