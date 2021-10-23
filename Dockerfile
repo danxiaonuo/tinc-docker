@@ -49,6 +49,7 @@ ENV BUILD_DEPS=$BUILD_DEPS
 ARG RUN_DEPS="\
     ca-certificates \
     git \ 
+    vim \
     libcrypto1.1 \
     libpcap \
     lzo \
