@@ -18,7 +18,7 @@ Name = ${NODE}
 # 网卡名称
 Interface = ${NETNAME}
 # Mode 有三种模式，分别是<router|switch|hub> (router) ,相对应我们平时使用到的路由、交换机、集线器 (默认模式 router)
-Mode = switch 
+Mode = router 
 # 加密类型
 Cipher  = id-aes256-GCM 
 # RSA加密协议强度
@@ -108,7 +108,7 @@ Name = ${NODE}
 # 网卡名称
 Interface = ${NETNAME}
 # Mode 有三种模式，分别是<router|switch|hub> (router) ,相对应我们平时使用到的路由、交换机、集线器 (默认模式 router)
-Mode = switch 
+Mode = router 
 # 加密类型
 Cipher  = id-aes256-GCM 
 # RSA加密协议强度
