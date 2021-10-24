@@ -57,7 +57,7 @@ services:
       # TINC端口
       - TINC_PORT=7666
       # DEBUG等级
-      - VERBOSE=2
+      - VERBOSE=3
     # 指定设备映射关系
     devices:
       - /dev/net/tun
