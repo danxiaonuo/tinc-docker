@@ -47,7 +47,7 @@ services:
       # 连接服务端地址
       - PUBLIC_IP=tinc.xiaonuo.live
       # 私有IPV4网关
-      - PRIVATE_IPV4_GW=10.88.0.0/24
+      - PRIVATE_IPV4_GW=10.88.0.0/16
       # 私有IPV6网关
       - PRIVATE_IPV6_GW=2088::/64
       # 私有IPV4地址
