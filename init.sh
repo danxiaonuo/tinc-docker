@@ -69,15 +69,15 @@ cat >/etc/tinc/${NETNAME}/tinc-up <<_EOF_
 #!/bin/sh
 ip link set ${INTERFACE} up mtu 1500
 ip -6 link set ${INTERFACE} up mtu 1500
-ip addr add ${PRIVATE_IPV4}/24 dev ${INTERFACE}
-ip -6 addr add ${PRIVATE_IPV6}/64 dev ${INTERFACE}
+ip addr add ${PRIVATE_IPV4}/${PRIVATE_IPV4_MASK} dev ${INTERFACE}
+ip -6 addr add ${PRIVATE_IPV6}/${PRIVATE_IPV6_MASK} dev ${INTERFACE}
 ip -6 route add ${PRIVATE_IPV6_GW} dev ${INTERFACE} metric 1
 _EOF_
 
 cat >/etc/tinc/"${NETNAME}"/tinc-down <<_EOF_
 #!/bin/sh
-ip route del ${PRIVATE_IPV4_GW} dev ${INTERFACE}
-ip -6 route del ${PRIVATE_IPV6_GW} dev ${INTERFACE}
+ip route del ${PRIVATE_IPV4_GW}/${PRIVATE_IPV4_MASK} dev ${INTERFACE}
+ip -6 route del ${PRIVATE_IPV6_GW}/${PRIVATE_IPV6_MASK} dev ${INTERFACE}
 ip link set ${INTERFACE} down
 ip -6 link set ${INTERFACE} dow
 _EOF_
@@ -157,15 +157,15 @@ cat >/etc/tinc/${NETNAME}/tinc-up <<_EOF_
 #!/bin/sh
 ip link set ${INTERFACE} up mtu 1500
 ip -6 link set ${INTERFACE} up mtu 1500
-ip addr add ${PRIVATE_IPV4}/24 dev ${INTERFACE}
-ip -6 addr add ${PRIVATE_IPV6}/64 dev ${INTERFACE}
+ip addr add ${PRIVATE_IPV4}/${PRIVATE_IPV4_MASK} dev ${INTERFACE}
+ip -6 addr add ${PRIVATE_IPV6}/${PRIVATE_IPV6_MASK} dev ${INTERFACE}
 ip -6 route add ${PRIVATE_IPV6_GW} dev ${INTERFACE} metric 1
 _EOF_
 
 cat >/etc/tinc/${NETNAME}/tinc-down <<_EOF_
 #!/bin/sh
-ip route del ${PRIVATE_IPV4_GW} dev ${INTERFACE}
-ip -6 route del ${PRIVATE_IPV6_GW} dev ${INTERFACE}
+ip route del ${PRIVATE_IPV4_GW}/${PRIVATE_IPV4_MASK} dev ${INTERFACE}
+ip -6 route del ${PRIVATE_IPV6_GW}/${PRIVATE_IPV6_MASK} dev ${INTERFACE}
 ip link set ${INTERFACE} down
 ip -6 link set ${INTERFACE} dow
 _EOF_
