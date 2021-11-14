@@ -71,7 +71,7 @@ ip link set ${INTERFACE} up mtu 1500
 ip -6 link set ${INTERFACE} up mtu 1500
 ip addr add ${PRIVATE_IPV4}/${PRIVATE_IPV4_MASK} dev ${INTERFACE}
 ip -6 addr add ${PRIVATE_IPV6}/${PRIVATE_IPV6_MASK} dev ${INTERFACE}
-ip -6 route add ${PRIVATE_IPV6_GW} dev ${INTERFACE} metric 1
+ip -6 route add ${PRIVATE_IPV6_GW}/${PRIVATE_IPV6_MASK} dev ${INTERFACE} metric 1
 _EOF_
 
 cat >/etc/tinc/"${NETNAME}"/tinc-down <<_EOF_
@@ -159,7 +159,7 @@ ip link set ${INTERFACE} up mtu 1500
 ip -6 link set ${INTERFACE} up mtu 1500
 ip addr add ${PRIVATE_IPV4}/${PRIVATE_IPV4_MASK} dev ${INTERFACE}
 ip -6 addr add ${PRIVATE_IPV6}/${PRIVATE_IPV6_MASK} dev ${INTERFACE}
-ip -6 route add ${PRIVATE_IPV6_GW} dev ${INTERFACE} metric 1
+ip -6 route add ${PRIVATE_IPV6_GW}/${PRIVATE_IPV6_MASK} dev ${INTERFACE} metric 1
 _EOF_
 
 cat >/etc/tinc/${NETNAME}/tinc-down <<_EOF_
