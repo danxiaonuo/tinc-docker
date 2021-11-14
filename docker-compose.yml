@@ -46,10 +46,14 @@ services:
       - PEERS=server01
       # 连接服务端地址
       - PUBLIC_IP=tinc.xiaonuo.live
+      # 私有IPV4掩码
+      - PRIVATE_IPV4_MASK=16
+      # 私有IPV6掩码
+      - PRIVATE_IPV6_MASK=64
       # 私有IPV4网关
-      - PRIVATE_IPV4_GW=10.88.0.0/16
+      - PRIVATE_IPV4_GW=10.88.0.0
       # 私有IPV6网关
-      - PRIVATE_IPV6_GW=2088::/64
+      - PRIVATE_IPV6_GW=2088::
       # 私有IPV4地址
       - PRIVATE_IPV4=10.88.0.1
       # 私有IPV6地址
