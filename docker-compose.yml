@@ -53,7 +53,7 @@ services:
       # 私有IPV4网关
       - PRIVATE_IPV4_GW=10.88.0.0
       # 私有IPV6网关
-      - PRIVATE_IPV6_GW=2088::
+      - PRIVATE_IPV6_GW=2088::0
       # 私有IPV4地址
       - PRIVATE_IPV4=10.88.0.1
       # 私有IPV6地址
