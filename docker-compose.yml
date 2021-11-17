@@ -42,8 +42,6 @@ services:
       - NETNAME=danxiaonuo
       # 网卡名称
       - INTERFACE=danxiaonuo
-      # 设置主动连接节点
-      - PEERS=server01
       # 连接服务端地址
       - PUBLIC_IP=tinc.xiaonuo.live
       # 私有IPV4掩码
