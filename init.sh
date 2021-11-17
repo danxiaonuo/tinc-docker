@@ -39,8 +39,6 @@ IndirectData = no
 # 仅直连不转发 - 适用于 meta node
 # 实验阶段
 DirectOnly = no
-# 数据包压缩级别
-Compression = level 
 # clamp maximum segment size - tcp 包-> pmtu
 ClampMSS = yes
 # 转发前减小 ipv4 包 ttl 和 ipv6 包的 Hop Limit
@@ -213,8 +211,6 @@ IndirectData = no
 # 仅直连不转发 - 适用于 meta node
 # 实验阶段
 DirectOnly = no
-# 数据包压缩级别
-Compression = level 
 # clamp maximum segment size - tcp 包-> pmtu
 ClampMSS = yes
 # 转发前减小 ipv4 包 ttl 和 ipv6 包的 Hop Limit
