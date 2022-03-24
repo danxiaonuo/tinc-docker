@@ -30,9 +30,9 @@ ARG BUILD_DEPS="\
     autoconf \
     libtool \
     texinfo \
-    autopoint \
-    intltoolize \
-    gtkdocize \
+    gettext \
+    intltool \
+    gtk-doc \
     build-base \
     curl \
     wget \
