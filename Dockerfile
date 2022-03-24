@@ -28,6 +28,7 @@ ENV DOCKER_IMAGE_TAG=$DOCKER_IMAGE_TAG
 ARG BUILD_DEPS="\
     automake \
     autoconf \
+    libtool \
     texinfo \
     build-base \
     curl \
