@@ -66,7 +66,7 @@ ENV RUN_DEPS=$RUN_DEPS
 
 # TINC
 # 版本号
-ARG TAGS=1.1
+ARG TAGS=release-1.1pre18
 ENV TAGS=$TAGS
 
 # ***** 安装依赖 *****
