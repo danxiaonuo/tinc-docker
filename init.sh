@@ -28,22 +28,24 @@ Cipher  = id-aes256-GCM
 Digest = whirlpool
 # MAC长度
 MACLength = 16
+# 服务器私钥的位置
+PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
 # 节点初始路径 MTU - Path MTU
 PMTU = 1500
 # 自动发现到节点的 Path MTU
 PMTUDiscovery = yes
 # 发送发现 MTU 消息的间隔
-MTUInfoInterval = 5
+MTUInfoInterval = 1
+# clamp maximum segment size - tcp 包-> pmtu
+ClampMSS = yes
 # 如果设置为 yes 则必须先有直连的 meta 链接
 IndirectData = no
 # 仅直连不转发 - 适用于 meta node
 # 实验阶段
-DirectOnly = no
-# clamp maximum segment size - tcp 包-> pmtu
-ClampMSS = yes
+DirectOnly = yes
 # 转发前减小 ipv4 包 ttl 和 ipv6 包的 Hop Limit
 # 实验阶段
-DecrementTTL = yes
+DecrementTTL = no
 # 设置广播包发到其他节点的方式, 所有节点需要使用相同的方式, 否则可能会产生路由循环
 # no 不发送广播包 
 # mst 使用 Minimum Spanning Tree, 保证发往每个节点
@@ -56,10 +58,7 @@ Broadcast = mst
 # off 不转发
 # internal 内部转发
 # kernel 包发往 TUN/TAP 设备, 交由内核转发, 性能更低, 但能使用内核的路由功能
-Forwarding = internal
-# 包打上 fwmark - 配合 iptables 可进行过滤
-# 试验阶段
-FWMark = 0
+Forwarding = off
 # 是否解析 hostname - dns 阻塞查询对性能有一点影响
 Hostnames = no
 # tun/tap IFF_ONE_QUEUE
@@ -73,31 +72,21 @@ KeyExpire = 3600
 # 尝试发现本机网络中的节点
 # 允许与本地节点地址建立直接连接
 # 目前, 本地发现机制是通过在 UDP 发现阶段发送本地地址的方式
-LocalDiscovery = yes
+LocalDiscovery = no
 # mac 地址失效时间 - 秒
 # switch 模式有效
 MACExpire = 600
 # 最大爆发连接数 - 超过的 1/s 一个
-MaxConnectionBurst = 100
+MaxConnectionBurst = 10000
 # 最大重连延时
-MaxTimeout = 900
-# ping 间隔 - 发现 mtu 检测节点
-PingInterval = 60
+MaxTimeout = 6
+# ping 间隔 发现 mtu 检测节点
+PingInterval = 1
 # 超时后中断 meta 链接
-PingTimeout = 5
+PingTimeout = 6
 # UDP 继承 TCP 的 TOS 字段
 # 实验阶段
 PriorityInheritance = no
-# 出的连接经过代理
-# socks4 address port [username]
-# socks5 address port [username password]
-# http address port
-# exec command
-#   环境变量 NAME, NODE, REMOTEADDRES, REMOTEPORT
-# 实验阶段
-# Proxy = socks4 | socks5 | http | exec
-# byte
-ReplayWindow = 32
 # 只允许 /etc/tinc/NETNAME/hosts/ 下的 Subnet 信息
 # 例如 A -> B -> C - C 不会学习到 A 的子网信息
 # 实验阶段
@@ -109,7 +98,7 @@ TunnelServer = no
 UDPDiscovery = yes
 UDPDiscoveryKeepaliveInterval = 9
 UDPDiscoveryInterval = 2
-UDPDiscoveryTimeout = 30
+UDPDiscoveryTimeout = 3
 UDPInfoInterval = 5
 UDPRcvBuf = 1048576
 UDPSndBuf = 1048576
@@ -117,20 +106,17 @@ UDPSndBuf = 1048576
 # udponly 只维护 udp 端口
 # yes | udponly | no
 UPnP = no
-UPnPDiscoverWait = 5
+UPnPDiscoverWait = 3
 UPnPRefreshPeriod = 60
 # 启用后, 会尝试使用 SPTPS 协议, key 交换会使用 Ephemeral ECDH, 会使用 Ed25519 作为授权, 而不是 RSA, 因此需要先生成 Ed25519
 # 如果先启用了且 join 了网络，再改成 no 时需要先准备好 rsa key
 ExperimentalProtocol = yes
-# 服务器私钥的位置
-PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
 # 如果启用, 会自动尝试与其他节点建立 meta 链接, 而不需要设置 ConnectTo
 # 不能链接 Port=0 的节点 - 系统随机端口
 # 试验阶段
 # yes | no
 AutoConnect = yes
 _EOF_
-
 
 # 设置hosts文件
 cat >>/etc/tinc/${NETNAME}/hosts/${NODE} <<_EOF_
@@ -200,22 +186,24 @@ Cipher  = id-aes256-GCM
 Digest = whirlpool
 # MAC长度
 MACLength = 16
+# 服务器私钥的位置
+PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
 # 节点初始路径 MTU - Path MTU
 PMTU = 1500
 # 自动发现到节点的 Path MTU
 PMTUDiscovery = yes
 # 发送发现 MTU 消息的间隔
-MTUInfoInterval = 5
+MTUInfoInterval = 1
+# clamp maximum segment size - tcp 包-> pmtu
+ClampMSS = yes
 # 如果设置为 yes 则必须先有直连的 meta 链接
 IndirectData = no
 # 仅直连不转发 - 适用于 meta node
 # 实验阶段
-DirectOnly = no
-# clamp maximum segment size - tcp 包-> pmtu
-ClampMSS = yes
+DirectOnly = yes
 # 转发前减小 ipv4 包 ttl 和 ipv6 包的 Hop Limit
 # 实验阶段
-DecrementTTL = yes
+DecrementTTL = no
 # 设置广播包发到其他节点的方式, 所有节点需要使用相同的方式, 否则可能会产生路由循环
 # no 不发送广播包 
 # mst 使用 Minimum Spanning Tree, 保证发往每个节点
@@ -228,10 +216,7 @@ Broadcast = mst
 # off 不转发
 # internal 内部转发
 # kernel 包发往 TUN/TAP 设备, 交由内核转发, 性能更低, 但能使用内核的路由功能
-Forwarding = internal
-# 包打上 fwmark - 配合 iptables 可进行过滤
-# 试验阶段
-FWMark = 0
+Forwarding = off
 # 是否解析 hostname - dns 阻塞查询对性能有一点影响
 Hostnames = no
 # tun/tap IFF_ONE_QUEUE
@@ -245,31 +230,21 @@ KeyExpire = 3600
 # 尝试发现本机网络中的节点
 # 允许与本地节点地址建立直接连接
 # 目前, 本地发现机制是通过在 UDP 发现阶段发送本地地址的方式
-LocalDiscovery = yes
+LocalDiscovery = no
 # mac 地址失效时间 - 秒
 # switch 模式有效
 MACExpire = 600
 # 最大爆发连接数 - 超过的 1/s 一个
-MaxConnectionBurst = 100
+MaxConnectionBurst = 10000
 # 最大重连延时
-MaxTimeout = 900
-# ping 间隔 - 发现 mtu 检测节点
-PingInterval = 60
+MaxTimeout = 6
+# ping 间隔 发现 mtu 检测节点
+PingInterval = 1
 # 超时后中断 meta 链接
-PingTimeout = 5
+PingTimeout = 6
 # UDP 继承 TCP 的 TOS 字段
 # 实验阶段
 PriorityInheritance = no
-# 出的连接经过代理
-# socks4 address port [username]
-# socks5 address port [username password]
-# http address port
-# exec command
-#   环境变量 NAME, NODE, REMOTEADDRES, REMOTEPORT
-# 实验阶段
-# Proxy = socks4 | socks5 | http | exec
-# byte
-ReplayWindow = 32
 # 只允许 /etc/tinc/NETNAME/hosts/ 下的 Subnet 信息
 # 例如 A -> B -> C - C 不会学习到 A 的子网信息
 # 实验阶段
@@ -281,7 +256,7 @@ TunnelServer = no
 UDPDiscovery = yes
 UDPDiscoveryKeepaliveInterval = 9
 UDPDiscoveryInterval = 2
-UDPDiscoveryTimeout = 30
+UDPDiscoveryTimeout = 3
 UDPInfoInterval = 5
 UDPRcvBuf = 1048576
 UDPSndBuf = 1048576
@@ -289,20 +264,17 @@ UDPSndBuf = 1048576
 # udponly 只维护 udp 端口
 # yes | udponly | no
 UPnP = no
-UPnPDiscoverWait = 5
+UPnPDiscoverWait = 3
 UPnPRefreshPeriod = 60
 # 启用后, 会尝试使用 SPTPS 协议, key 交换会使用 Ephemeral ECDH, 会使用 Ed25519 作为授权, 而不是 RSA, 因此需要先生成 Ed25519
 # 如果先启用了且 join 了网络，再改成 no 时需要先准备好 rsa key
 ExperimentalProtocol = yes
-# 服务器私钥的位置
-PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
 # 如果启用, 会自动尝试与其他节点建立 meta 链接, 而不需要设置 ConnectTo
 # 不能链接 Port=0 的节点 - 系统随机端口
 # 试验阶段
 # yes | no
 AutoConnect = yes
 _EOF_
-
 
 # 设置hosts文件
 cat >>/etc/tinc/${NETNAME}/hosts/${NODE} <<_EOF_
