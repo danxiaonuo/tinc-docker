@@ -1,6 +1,5 @@
 #=================================================
 # https://github.com/danxiaonuo/tinc-docker
-# Description: Build OpenWrt using GitHub Actions
 # Lisence: MIT
 # Author: danxiaonuo
 # Blog: https://www.danxiaonuo.com
@@ -21,7 +20,7 @@ on:
     inputs:
       build:
         description: 'build tinc'
-        required: false
+        required: true
         default: 'build tinc'
   # 定时触发编译(每天早5点)
   schedule:
