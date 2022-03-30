@@ -21,6 +21,11 @@ ENV DOCKER_IMAGE_OS=$DOCKER_IMAGE_OS
 ARG DOCKER_IMAGE_TAG=20.04
 ENV DOCKER_IMAGE_TAG=$DOCKER_IMAGE_TAG
 
+# TINC
+# 版本号
+ARG TAGS=release-1.1pre18
+ENV TAGS=$TAGS
+
 # 环境设置
 ARG DEBIAN_FRONTEND=noninteractive
 ENV DEBIAN_FRONTEND=$DEBIAN_FRONTEND
@@ -30,6 +35,7 @@ ARG PKG_DEPS="\
     zsh \
     bash \
     bash-completion \
+    apt-utils \
     dnsutils \
     iproute2 \
     net-tools \
@@ -57,12 +63,12 @@ ARG PKG_DEPS="\
     locales \
     language-pack-zh-hans \
     build-essential \
-	  libncurses5-dev \
-	  libreadline6-dev \
-	  libzlcore-dev \
-	  zlib1g-dev \
-	  liblzo2-dev \
-	  libssl-dev \
+    libncurses5-dev \
+    libreadline6-dev \
+    libzlcore-dev \
+    zlib1g-dev \
+    liblzo2-dev \
+    libssl-dev \
     ca-certificates"
 ENV PKG_DEPS=$PKG_DEPS
 
