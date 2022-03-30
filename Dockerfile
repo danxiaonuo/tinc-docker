@@ -44,6 +44,7 @@ ARG BUILD_DEPS="\
     automake \
     libpcap-dev \
     texinfo"
+ENV BUILD_DEPS=$BUILD_DEPS
 # 安装依赖包
 ARG PKG_DEPS="\
     zsh \
