@@ -30,12 +30,25 @@ ENV TAGS=$TAGS
 ARG DEBIAN_FRONTEND=noninteractive
 ENV DEBIAN_FRONTEND=$DEBIAN_FRONTEND
 
+# 构建依赖
+ARG BUILD_DEPS="\
+    apt-utils \
+    build-essential \
+    libncurses5-dev \
+    libreadline6-dev \
+    libzlcore-dev \
+    zlib1g-dev \
+    liblzo2-dev \
+    libssl-dev \
+    autoconf \
+    automake \
+    libpcap-dev \
+    texinfo"
 # 安装依赖包
 ARG PKG_DEPS="\
     zsh \
     bash \
     bash-completion \
-    apt-utils \
     dnsutils \
     iproute2 \
     net-tools \
@@ -62,16 +75,6 @@ ARG PKG_DEPS="\
     debsums \
     locales \
     language-pack-zh-hans \
-    build-essential \
-    libncurses5-dev \
-    libreadline6-dev \
-    libzlcore-dev \
-    zlib1g-dev \
-    liblzo2-dev \
-    libssl-dev \
-    autoconf \
-    automake \
-    libpcap-dev \
     ca-certificates"
 ENV PKG_DEPS=$PKG_DEPS
 
@@ -80,7 +83,7 @@ RUN set -eux && \
    # 更新源地址并更新系统软件
    DEBIAN_FRONTEND=noninteractive apt-get update -qqy && apt-get upgrade -qqy && \
    # 安装依赖包
-   DEBIAN_FRONTEND=noninteractive apt-get install -qqy --no-install-recommends $PKG_DEPS && \
+   DEBIAN_FRONTEND=noninteractive apt-get install -qqy --no-install-recommends $BUILD_DEPS $RUN_DEPS && \
    DEBIAN_FRONTEND=noninteractive apt-get -qqy --no-install-recommends autoremove --purge && \
    DEBIAN_FRONTEND=noninteractive apt-get -qqy --no-install-recommends autoclean && \
    rm -rf /var/lib/apt/lists/* && \
@@ -105,6 +108,7 @@ RUN git clone --depth=1 -b ${TAGS} --progress https://github.com/gsliepen/tinc.g
     ln -sf /opt/tinc/sbin/tincd /usr/bin/tincd &&  \
     ln -sf /opt/tinc/sbin/tinc /usr/bin/tinc &&  \
     mkdir -pv /etc/tinc && mkdir -pv /opt/tinc/var/run && mkdir -pv /opt/tinc/var/log && \
+    DEBIAN_FRONTEND=noninteractive apt-get -qqy --no-install-recommends autoremove --purge $BUILD_DEPS && \
     rm -rf /tmp/* /src && \
     mkdir -p /var/log/tinc && \
     rm -rf /var/cache/apk/*
