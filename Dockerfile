@@ -71,6 +71,7 @@ ARG PKG_DEPS="\
     libssl-dev \
     autoconf \
     automake \
+    libpcap-dev \
     ca-certificates"
 ENV PKG_DEPS=$PKG_DEPS
 
