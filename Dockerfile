@@ -69,6 +69,8 @@ ARG PKG_DEPS="\
     zlib1g-dev \
     liblzo2-dev \
     libssl-dev \
+    autoconf \
+    automake \
     ca-certificates"
 ENV PKG_DEPS=$PKG_DEPS
 
