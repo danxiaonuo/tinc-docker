@@ -84,7 +84,7 @@ RUN set -eux && \
    # 更新源地址并更新系统软件
    DEBIAN_FRONTEND=noninteractive apt-get update -qqy && apt-get upgrade -qqy && \
    # 安装依赖包
-   DEBIAN_FRONTEND=noninteractive apt-get install -qqy --no-install-recommends $BUILD_DEPS $RUN_DEPS && \
+   DEBIAN_FRONTEND=noninteractive apt-get install -qqy --no-install-recommends $BUILD_DEPS $PKG_DEPS && \
    DEBIAN_FRONTEND=noninteractive apt-get -qqy --no-install-recommends autoremove --purge && \
    DEBIAN_FRONTEND=noninteractive apt-get -qqy --no-install-recommends autoclean && \
    rm -rf /var/lib/apt/lists/* && \
