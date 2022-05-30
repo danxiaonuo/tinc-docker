@@ -42,7 +42,7 @@ ClampMSS = yes
 IndirectData = no
 # 仅直连不转发 - 适用于 meta node
 # 实验阶段
-DirectOnly = yes
+DirectOnly = no
 # 转发前减小 ipv4 包 ttl 和 ipv6 包的 Hop Limit
 # 实验阶段
 DecrementTTL = no
@@ -58,7 +58,7 @@ Broadcast = mst
 # off 不转发
 # internal 内部转发
 # kernel 包发往 TUN/TAP 设备, 交由内核转发, 性能更低, 但能使用内核的路由功能
-Forwarding = off
+Forwarding = internal
 # 是否解析 hostname - dns 阻塞查询对性能有一点影响
 Hostnames = no
 # tun/tap IFF_ONE_QUEUE
@@ -72,7 +72,7 @@ KeyExpire = 3600
 # 尝试发现本机网络中的节点
 # 允许与本地节点地址建立直接连接
 # 目前, 本地发现机制是通过在 UDP 发现阶段发送本地地址的方式
-LocalDiscovery = no
+LocalDiscovery = yes
 # mac 地址失效时间 - 秒
 # switch 模式有效
 MACExpire = 600
@@ -200,7 +200,7 @@ ClampMSS = yes
 IndirectData = no
 # 仅直连不转发 - 适用于 meta node
 # 实验阶段
-DirectOnly = yes
+DirectOnly = no
 # 转发前减小 ipv4 包 ttl 和 ipv6 包的 Hop Limit
 # 实验阶段
 DecrementTTL = no
@@ -216,7 +216,7 @@ Broadcast = mst
 # off 不转发
 # internal 内部转发
 # kernel 包发往 TUN/TAP 设备, 交由内核转发, 性能更低, 但能使用内核的路由功能
-Forwarding = off
+Forwarding = internal
 # 是否解析 hostname - dns 阻塞查询对性能有一点影响
 Hostnames = no
 # tun/tap IFF_ONE_QUEUE
@@ -230,7 +230,7 @@ KeyExpire = 3600
 # 尝试发现本机网络中的节点
 # 允许与本地节点地址建立直接连接
 # 目前, 本地发现机制是通过在 UDP 发现阶段发送本地地址的方式
-LocalDiscovery = no
+LocalDiscovery = yes
 # mac 地址失效时间 - 秒
 # switch 模式有效
 MACExpire = 600
