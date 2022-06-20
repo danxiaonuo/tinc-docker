@@ -75,6 +75,7 @@ ARG PKG_DEPS="\
     libmecab2 \
     debsums \
     locales \
+    iptables \
     language-pack-zh-hans \
     ca-certificates"
 ENV PKG_DEPS=$PKG_DEPS
