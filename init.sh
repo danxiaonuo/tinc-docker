@@ -85,8 +85,10 @@ PingInterval = 1
 # 超时后中断 meta 链接
 PingTimeout = 6
 # UDP 继承 TCP 的 TOS 字段
-# 实验阶段
-PriorityInheritance = no
+# 隧道IPv4报文的TOS字段值将被UDP包继承发出的Ets
+PriorityInheritance = yes
+# 进程优先级
+ProcessPriority = high
 # 只允许 /etc/tinc/NETNAME/hosts/ 下的 Subnet 信息
 # 例如 A -> B -> C - C 不会学习到 A 的子网信息
 # 实验阶段
@@ -140,6 +142,12 @@ ip -6 link set ${INTERFACE} up mtu 1500
 ip addr add ${PRIVATE_IPV4}/${PRIVATE_IPV4_MASK} dev ${INTERFACE}
 ip -6 addr add ${PRIVATE_IPV6}/${PRIVATE_IPV6_MASK} dev ${INTERFACE}
 ip -6 route add ${PRIVATE_IPV6_GW}/${PRIVATE_IPV6_MASK} dev ${INTERFACE} metric 1
+iptables -t nat -A POSTROUTING -s "${PRIVATE_IPV4_GW}/${PRIVATE_IPV4_MASK}" ! -o xiaonuo -j MASQUERADE
+ip6tables -t nat -A POSTROUTING -s "${PRIVATE_IPV6_GW}/${PRIVATE_IPV6_MASK}" ! -o xiaonuo -j MASQUERADE
+iptables -A FORWARD -i xiaonuo -j ACCEPT
+ip6tables -A FORWARD -i xiaonuo -j ACCEPT
+iptables -A FORWARD -o xiaonuo -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+ip6tables -A FORWARD -o xiaonuo -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 _EOF_
 
 cat >/etc/tinc/"${NETNAME}"/tinc-down <<_EOF_
@@ -148,6 +156,12 @@ ip route del ${PRIVATE_IPV4_GW}/${PRIVATE_IPV4_MASK} dev ${INTERFACE}
 ip -6 route del ${PRIVATE_IPV6_GW}/${PRIVATE_IPV6_MASK} dev ${INTERFACE}
 ip link set ${INTERFACE} down
 ip -6 link set ${INTERFACE} dow
+iptables -t nat -D POSTROUTING -s "${PRIVATE_IPV4_GW}/${PRIVATE_IPV4_MASK}" ! -o xiaonuo -j MASQUERADE
+ip6tables -t nat -D POSTROUTING -s "${PRIVATE_IPV6_GW}/${PRIVATE_IPV6_MASK}" ! -o xiaonuo -j MASQUERADE
+iptables -D FORWARD -i xiaonuo -j ACCEPT
+ip6tables -D FORWARD -i xiaonuo -j ACCEPT
+iptables -D FORWARD -o xiaonuo -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+ip6tables -D FORWARD -o xiaonuo -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 _EOF_
 
 # 设置文件权限
@@ -243,8 +257,10 @@ PingInterval = 1
 # 超时后中断 meta 链接
 PingTimeout = 6
 # UDP 继承 TCP 的 TOS 字段
-# 实验阶段
-PriorityInheritance = no
+# 隧道IPv4报文的TOS字段值将被UDP包继承发出的Ets
+PriorityInheritance = yes
+# 进程优先级
+ProcessPriority = high
 # 只允许 /etc/tinc/NETNAME/hosts/ 下的 Subnet 信息
 # 例如 A -> B -> C - C 不会学习到 A 的子网信息
 # 实验阶段
