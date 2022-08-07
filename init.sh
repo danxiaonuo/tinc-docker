@@ -37,7 +37,7 @@ PMTUDiscovery = yes
 # 发送发现 MTU 消息的间隔
 MTUInfoInterval = 1
 # clamp maximum segment size - tcp 包-> pmtu
-ClampMSS = yes
+ClampMSS = no
 # 如果设置为 yes 则必须先有直连的 meta 链接
 IndirectData = no
 # 仅直连不转发 - 适用于 meta node
@@ -86,7 +86,7 @@ PingInterval = 1
 PingTimeout = 6
 # UDP 继承 TCP 的 TOS 字段
 # 隧道IPv4报文的TOS字段值将被UDP包继承发出的Ets
-PriorityInheritance = yes
+PriorityInheritance = no
 # 进程优先级
 ProcessPriority = high
 # 只允许 /etc/tinc/NETNAME/hosts/ 下的 Subnet 信息
@@ -97,7 +97,7 @@ StrictSubnets = no
 # 实验阶段
 TunnelServer = no
 # 将尝试使用 TCP 与节点建立 UDP 连接
-UDPDiscovery = yes
+UDPDiscovery = no
 UDPDiscoveryKeepaliveInterval = 9
 UDPDiscoveryInterval = 2
 UDPDiscoveryTimeout = 3
@@ -209,7 +209,7 @@ PMTUDiscovery = yes
 # 发送发现 MTU 消息的间隔
 MTUInfoInterval = 1
 # clamp maximum segment size - tcp 包-> pmtu
-ClampMSS = yes
+ClampMSS = no
 # 如果设置为 yes 则必须先有直连的 meta 链接
 IndirectData = no
 # 仅直连不转发 - 适用于 meta node
@@ -258,7 +258,7 @@ PingInterval = 1
 PingTimeout = 6
 # UDP 继承 TCP 的 TOS 字段
 # 隧道IPv4报文的TOS字段值将被UDP包继承发出的Ets
-PriorityInheritance = yes
+PriorityInheritance = no
 # 进程优先级
 ProcessPriority = high
 # 只允许 /etc/tinc/NETNAME/hosts/ 下的 Subnet 信息
@@ -269,7 +269,7 @@ StrictSubnets = no
 # 实验阶段
 TunnelServer = no
 # 将尝试使用 TCP 与节点建立 UDP 连接
-UDPDiscovery = yes
+UDPDiscovery = no
 UDPDiscoveryKeepaliveInterval = 9
 UDPDiscoveryInterval = 2
 UDPDiscoveryTimeout = 3
