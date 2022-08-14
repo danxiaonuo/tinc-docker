@@ -79,14 +79,16 @@ MACExpire = 600
 # 最大爆发连接数 - 超过的 1/s 一个
 MaxConnectionBurst = 10000
 # 最大重连延时
-MaxTimeout = 6
+MaxTimeout = 900
 # ping 间隔 发现 mtu 检测节点
-PingInterval = 1
+PingInterval = 3
 # 超时后中断 meta 链接
 PingTimeout = 6
 # UDP 继承 TCP 的 TOS 字段
 # 隧道IPv4报文的TOS字段值将被UDP包继承发出的Ets
 PriorityInheritance = no
+# 窗口大小
+ReplayWindow = 128
 # 进程优先级
 ProcessPriority = high
 # 只允许 /etc/tinc/NETNAME/hosts/ 下的 Subnet 信息
@@ -251,14 +253,16 @@ MACExpire = 600
 # 最大爆发连接数 - 超过的 1/s 一个
 MaxConnectionBurst = 10000
 # 最大重连延时
-MaxTimeout = 6
+MaxTimeout = 900
 # ping 间隔 发现 mtu 检测节点
-PingInterval = 1
+PingInterval = 3
 # 超时后中断 meta 链接
 PingTimeout = 6
 # UDP 继承 TCP 的 TOS 字段
 # 隧道IPv4报文的TOS字段值将被UDP包继承发出的Ets
 PriorityInheritance = no
+# 窗口大小
+ReplayWindow = 128
 # 进程优先级
 ProcessPriority = high
 # 只允许 /etc/tinc/NETNAME/hosts/ 下的 Subnet 信息
