@@ -6,7 +6,7 @@ if [[ $RUNMODE == server ]]; then
 	if [ ! -f /etc/tinc/"${NETNAME}"/hosts/"${NODE}" ]; then
 
 # 创建 tinc 目录
-mkdir -pv /etc/tinc && mkdir -pv opt/tinc/run && mkdir -pv /opt/tinc/logs
+mkdir -pv /etc/tinc && mkdir -pv /opt/tinc/run && mkdir -pv /opt/tinc/logs
 
 # 初始化节点
 tinc -n ${NETNAME} init ${NODE} >/dev/null 2>&1
@@ -198,7 +198,7 @@ then
 	if [ ! -f /etc/tinc/"${NETNAME}"/hosts/"${NODE}" ]; then
 
 # 创建 tinc 目录
-mkdir -pv /etc/tinc && mkdir -pv opt/tinc/run && mkdir -pv /opt/tinc/logs
+mkdir -pv /etc/tinc && mkdir -pv /opt/tinc/run && mkdir -pv /opt/tinc/logs
 
 # 初始化节点
 tinc -n ${NETNAME} init ${NODE} >/dev/null 2>&1
