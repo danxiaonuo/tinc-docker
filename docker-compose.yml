@@ -26,7 +26,7 @@ services:
     volumes:
       # 配置目录与文件
       - ./conf/tinc/data:/etc/tinc:rw,cached
-      - ./conf/tinc/logs:/opt/tinc/var/log:rw,cached
+      - ./conf/tinc/logs:/opt/tinc/logs:rw,cached
       # 同步宿主机时区与时间
       - /usr/share/zoneinfo:/usr/share/zoneinfo:ro,cached
       - /etc/localtime:/etc/localtime:ro,cached
