@@ -6,7 +6,7 @@ if [[ $RUNMODE == server ]]; then
 	if [ ! -f /etc/tinc/"${NETNAME}"/hosts/"${NODE}" ]; then
 
 # 创建 tinc 目录
-mkdir -pv /etc/tinc && mkdir -pv /opt/tinc/var/run/
+mkdir -pv /etc/tinc && mkdir -pv opt/tinc/run && mkdir -pv /opt/tinc/logs
 
 # 初始化节点
 tinc -n ${NETNAME} init ${NODE} >/dev/null 2>&1
@@ -31,7 +31,7 @@ MACLength = 16
 # 服务器私钥的位置
 PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
 # 节点初始路径 MTU - Path MTU
-PMTU = 1500
+PMTU = 1300
 # 自动发现到节点的 Path MTU
 PMTUDiscovery = yes
 # 发送发现 MTU 消息的间隔
@@ -87,8 +87,6 @@ PingTimeout = 6
 # UDP 继承 TCP 的 TOS 字段
 # 隧道IPv4报文的TOS字段值将被UDP包继承发出的Ets
 PriorityInheritance = no
-# 窗口大小
-ReplayWindow = 128
 # 进程优先级
 ProcessPriority = high
 # 只允许 /etc/tinc/NETNAME/hosts/ 下的 Subnet 信息
@@ -99,7 +97,7 @@ StrictSubnets = no
 # 实验阶段
 TunnelServer = no
 # 将尝试使用 TCP 与节点建立 UDP 连接
-UDPDiscovery = no
+UDPDiscovery = yes
 UDPDiscoveryKeepaliveInterval = 9
 UDPDiscoveryInterval = 2
 UDPDiscoveryTimeout = 3
@@ -119,7 +117,7 @@ ExperimentalProtocol = yes
 # 不能链接 Port=0 的节点 - 系统随机端口
 # 试验阶段
 # yes | no
-AutoConnect = yes
+# AutoConnect = yes
 _EOF_
 
 # 设置hosts文件
@@ -180,7 +178,7 @@ then
 	if [ ! -f /etc/tinc/"${NETNAME}"/hosts/"${NODE}" ]; then
 
 # 创建 tinc 目录
-mkdir -pv /etc/tinc && mkdir -pv /opt/tinc/var/run/
+mkdir -pv /etc/tinc && mkdir -pv opt/tinc/run && mkdir -pv /opt/tinc/logs
 
 # 初始化节点
 tinc -n ${NETNAME} init ${NODE} >/dev/null 2>&1
@@ -205,7 +203,7 @@ MACLength = 16
 # 服务器私钥的位置
 PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
 # 节点初始路径 MTU - Path MTU
-PMTU = 1500
+PMTU = 1300
 # 自动发现到节点的 Path MTU
 PMTUDiscovery = yes
 # 发送发现 MTU 消息的间隔
@@ -261,8 +259,6 @@ PingTimeout = 6
 # UDP 继承 TCP 的 TOS 字段
 # 隧道IPv4报文的TOS字段值将被UDP包继承发出的Ets
 PriorityInheritance = no
-# 窗口大小
-ReplayWindow = 128
 # 进程优先级
 ProcessPriority = high
 # 只允许 /etc/tinc/NETNAME/hosts/ 下的 Subnet 信息
@@ -273,7 +269,7 @@ StrictSubnets = no
 # 实验阶段
 TunnelServer = no
 # 将尝试使用 TCP 与节点建立 UDP 连接
-UDPDiscovery = no
+UDPDiscovery = yes
 UDPDiscoveryKeepaliveInterval = 9
 UDPDiscoveryInterval = 2
 UDPDiscoveryTimeout = 3
@@ -301,11 +297,8 @@ cat >>/etc/tinc/${NETNAME}/hosts/${NODE} <<_EOF_
 # 定义tinc内网网段
 Subnet= ${PRIVATE_IPV4}/32
 Subnet= ${PRIVATE_IPV6}/128
-# 路由器内网网段
-Subnet= 0.0.0.0/0
-Subnet= ::/0
 # 监听端口
-Port= ${TINC_PORT}
+Port= 0
 _EOF_
 
 # 设置路由
