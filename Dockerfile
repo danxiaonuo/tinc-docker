@@ -109,7 +109,7 @@ RUN git clone --depth=1 -b ${TAGS} --progress https://github.com/gsliepen/tinc.g
     make -j$(($(nproc)+1)) install &&  \
     ln -sf /opt/tinc/sbin/tincd /usr/bin/tincd &&  \
     ln -sf /opt/tinc/sbin/tinc /usr/bin/tinc &&  \
-    mkdir -pv /etc/tinc && mkdir -pv /opt/tinc/var/run && mkdir -pv /opt/tinc/var/log && \
+    mkdir -pv /etc/tinc && mkdir -pv /opt/tinc/run && mkdir -pv /opt/tinc/logs && \
     DEBIAN_FRONTEND=noninteractive apt-get -qqy --no-install-recommends autoremove --purge $BUILD_DEPS && \
     rm -rf /tmp/* /src && \
     mkdir -p /var/log/tinc && \
