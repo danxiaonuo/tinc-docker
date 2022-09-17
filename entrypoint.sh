@@ -4,6 +4,8 @@
 
 exec tinc --net=${NETNAME} start \
           --no-detach \
+	  --mlock \
           --debug=${VERBOSE} \
-	  --logfile=/opt/tinc/var/log/tinc.${NETNAME}.log \
+	  --pidfile=/opt/tinc/run/tinc.${NETNAME}.pid \
+	  --logfile=/opt/tinc/logs/tinc.${NETNAME}.logs \
            "$@"
