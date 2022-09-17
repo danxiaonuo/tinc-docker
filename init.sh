@@ -33,7 +33,7 @@ PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
 # 节点初始路径 MTU - Path MTU
 PMTU = 1300
 # 自动发现到节点的 Path MTU
-PMTUDiscovery = yes
+PMTUDiscovery = no
 # 发送发现 MTU 消息的间隔
 MTUInfoInterval = 1
 # clamp maximum segment size - tcp 包-> pmtu
@@ -225,7 +225,7 @@ PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
 # 节点初始路径 MTU - Path MTU
 PMTU = 1300
 # 自动发现到节点的 Path MTU
-PMTUDiscovery = yes
+PMTUDiscovery = no
 # 发送发现 MTU 消息的间隔
 MTUInfoInterval = 1
 # clamp maximum segment size - tcp 包-> pmtu
