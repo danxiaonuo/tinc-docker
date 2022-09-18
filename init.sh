@@ -152,11 +152,11 @@ ip -6 route add ${PRIVATE_IPV6_GW}/${PRIVATE_IPV6_MASK} dev ${INTERFACE} metric 
 # ipv4配置
 iptables -A FORWARD -o ${NETNAME} -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 iptables -A FORWARD -i ${NETNAME} -j ACCEPT
-iptables -t nat -A POSTROUTING -s "${PRIVATE_IPV4_GW}/${PRIVATE_IPV4_MASK}" ! -o xiaonuo -j MASQUERADE
+iptables -t nat -A POSTROUTING -s "${PRIVATE_IPV4_GW}/${PRIVATE_IPV4_MASK}" ! -o ${INTERFACE} -j MASQUERADE
 # ipv6配置
 ip6tables -A FORWARD -o ${NETNAME} -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 ip6tables -A FORWARD -i ${NETNAME} -j ACCEPT
-ip6tables -t nat -A POSTROUTING -s "${PRIVATE_IPV6_GW}/${PRIVATE_IPV6_MASK}" ! -o xiaonuo -j MASQUERADE
+ip6tables -t nat -A POSTROUTING -s "${PRIVATE_IPV6_GW}/${PRIVATE_IPV6_MASK}" ! -o ${INTERFACE} -j MASQUERADE
 _EOF_
 
 cat >/etc/tinc/"${NETNAME}"/tinc-down <<_EOF_
@@ -169,11 +169,11 @@ ip -6 route del ${PRIVATE_IPV6_GW}/${PRIVATE_IPV6_MASK} dev ${INTERFACE}
 # ipv4配置
 iptables -D FORWARD -o ${NETNAME} -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 iptables -D FORWARD -i ${NETNAME} -j ACCEPT
-iptables -t nat -D POSTROUTING -s "${PRIVATE_IPV4_GW}/${PRIVATE_IPV4_MASK}" ! -o xiaonuo -j MASQUERADE
+iptables -t nat -D POSTROUTING -s "${PRIVATE_IPV4_GW}/${PRIVATE_IPV4_MASK}" ! -o ${INTERFACE} -j MASQUERADE
 # ipv6配置
 ip6tables -D FORWARD -o ${NETNAME} -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 ip6tables -D FORWARD -i ${NETNAME} -j ACCEPT
-ip6tables -t nat -D POSTROUTING -s "${PRIVATE_IPV6_GW}/${PRIVATE_IPV6_MASK}" ! -o xiaonuo -j MASQUERADE
+ip6tables -t nat -D POSTROUTING -s "${PRIVATE_IPV6_GW}/${PRIVATE_IPV6_MASK}" ! -o ${INTERFACE} -j MASQUERADE
 
 # 本机地址
 ip -4 addr del ${PRIVATE_IPV4}/${PRIVATE_IPV4_MASK} dev ${INTERFACE}
@@ -339,11 +339,11 @@ ip -6 route add ${PRIVATE_IPV6_GW}/${PRIVATE_IPV6_MASK} dev ${INTERFACE} metric 
 # ipv4配置
 iptables -A FORWARD -o ${NETNAME} -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 iptables -A FORWARD -i ${NETNAME} -j ACCEPT
-iptables -t nat -A POSTROUTING -s "${PRIVATE_IPV4_GW}/${PRIVATE_IPV4_MASK}" ! -o xiaonuo -j MASQUERADE
+iptables -t nat -A POSTROUTING -s "${PRIVATE_IPV4_GW}/${PRIVATE_IPV4_MASK}" ! -o ${INTERFACE} -j MASQUERADE
 # ipv6配置
 ip6tables -A FORWARD -o ${NETNAME} -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 ip6tables -A FORWARD -i ${NETNAME} -j ACCEPT
-ip6tables -t nat -A POSTROUTING -s "${PRIVATE_IPV6_GW}/${PRIVATE_IPV6_MASK}" ! -o xiaonuo -j MASQUERADE
+ip6tables -t nat -A POSTROUTING -s "${PRIVATE_IPV6_GW}/${PRIVATE_IPV6_MASK}" ! -o ${INTERFACE} -j MASQUERADE
 _EOF_
 
 cat >/etc/tinc/"${NETNAME}"/tinc-down <<_EOF_
@@ -356,11 +356,11 @@ ip -6 route del ${PRIVATE_IPV6_GW}/${PRIVATE_IPV6_MASK} dev ${INTERFACE}
 # ipv4配置
 iptables -D FORWARD -o ${NETNAME} -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 iptables -D FORWARD -i ${NETNAME} -j ACCEPT
-iptables -t nat -D POSTROUTING -s "${PRIVATE_IPV4_GW}/${PRIVATE_IPV4_MASK}" ! -o xiaonuo -j MASQUERADE
+iptables -t nat -D POSTROUTING -s "${PRIVATE_IPV4_GW}/${PRIVATE_IPV4_MASK}" ! -o ${INTERFACE} -j MASQUERADE
 # ipv6配置
 ip6tables -D FORWARD -o ${NETNAME} -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 ip6tables -D FORWARD -i ${NETNAME} -j ACCEPT
-ip6tables -t nat -D POSTROUTING -s "${PRIVATE_IPV6_GW}/${PRIVATE_IPV6_MASK}" ! -o xiaonuo -j MASQUERADE
+ip6tables -t nat -D POSTROUTING -s "${PRIVATE_IPV6_GW}/${PRIVATE_IPV6_MASK}" ! -o ${INTERFACE} -j MASQUERADE
 
 # 本机地址
 ip -4 addr del ${PRIVATE_IPV4}/${PRIVATE_IPV4_MASK} dev ${INTERFACE}
