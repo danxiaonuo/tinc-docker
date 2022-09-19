@@ -86,7 +86,7 @@ PingInterval = 3
 PingTimeout = 6
 # UDP 继承 TCP 的 TOS 字段
 # 隧道IPv4报文的TOS字段值将被UDP包继承发出的Ets
-PriorityInheritance = no
+PriorityInheritance = yes
 # 进程优先级
 ProcessPriority = high
 # 只允许 /etc/tinc/NETNAME/hosts/ 下的 Subnet 信息
@@ -290,7 +290,7 @@ PingInterval = 3
 PingTimeout = 6
 # UDP 继承 TCP 的 TOS 字段
 # 隧道IPv4报文的TOS字段值将被UDP包继承发出的Ets
-PriorityInheritance = no
+PriorityInheritance = yes
 # 进程优先级
 ProcessPriority = high
 # 只允许 /etc/tinc/NETNAME/hosts/ 下的 Subnet 信息
@@ -329,6 +329,9 @@ cat >>/etc/tinc/${NETNAME}/hosts/${NODE} <<_EOF_
 # 定义tinc内网网段
 Subnet= ${PRIVATE_IPV4}/32
 Subnet= ${PRIVATE_IPV6}/128
+# 路由器内网网段
+Subnet= 0.0.0.0/0
+Subnet= ::/0
 # 监听端口
 Port= 0
 _EOF_
