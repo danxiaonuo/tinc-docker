@@ -43,7 +43,7 @@ services:
       # 网卡名称
       - INTERFACE=danxiaonuo
       # 连接服务端地址
-      - PUBLIC_IP=uola.xiaonuo.live
+      - PUBLIC_IP=tunnel.xiaonuo.live
       # 私有IPV4掩码
       - PRIVATE_IPV4_MASK=16
       # 私有IPV6掩码
