@@ -77,7 +77,7 @@ LocalDiscovery = yes
 # switch 模式有效
 MACExpire = 600
 # 最大爆发连接数 - 超过的 1/s 一个
-MaxConnectionBurst = 10000
+MaxConnectionBurst = 1000000
 # 最大重连延时
 MaxTimeout = 900
 # ping 间隔 发现 mtu 检测节点
@@ -281,7 +281,7 @@ LocalDiscovery = yes
 # switch 模式有效
 MACExpire = 600
 # 最大爆发连接数 - 超过的 1/s 一个
-MaxConnectionBurst = 10000
+MaxConnectionBurst = 1000000
 # 最大重连延时
 MaxTimeout = 900
 # ping 间隔 发现 mtu 检测节点
