@@ -31,7 +31,7 @@ MACLength = 16
 # 服务器私钥的位置
 PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
 # 节点初始路径 MTU - Path MTU
-PMTU = 1300
+PMTU = 8900
 # 自动发现到节点的 Path MTU
 PMTUDiscovery = no
 # 发送发现 MTU 消息的间隔
@@ -102,8 +102,8 @@ UDPDiscoveryKeepaliveInterval = 9
 UDPDiscoveryInterval = 2
 UDPDiscoveryTimeout = 3
 UDPInfoInterval = 5
-UDPRcvBuf = 1048576
-UDPSndBuf = 1048576
+UDPRcvBuf = 104857600
+UDPSndBuf = 104857600
 # 搜索 UPnP-IGD，管理维护 tinc 的端口映射
 # udponly 只维护 udp 端口
 # yes | udponly | no
@@ -144,8 +144,8 @@ IPV4_ADDR="${PRIVATE_IPV4}"
 IPV6_ADDR="${PRIVATE_IPV6}"
 
 # 接口
-ip -4 link set \${INTERFACE} up mtu 1300 txqlen 1500
-ip -6 link set \${INTERFACE} up mtu 1300 txqlen 1500
+ip -4 link set \${INTERFACE} up mtu 8900 txqlen 1500
+ip -6 link set \${INTERFACE} up mtu 8900 txqlen 1500
 
 # 本机地址
 ip -4 addr add \${IPV4_ADDR}/${PRIVATE_IPV4_MASK} dev \${INTERFACE}
@@ -235,7 +235,7 @@ MACLength = 16
 # 服务器私钥的位置
 PrivateKeyFile = /etc/tinc/${NETNAME}/rsa_key.priv
 # 节点初始路径 MTU - Path MTU
-PMTU = 1300
+PMTU = 8900
 # 自动发现到节点的 Path MTU
 PMTUDiscovery = no
 # 发送发现 MTU 消息的间隔
@@ -306,8 +306,8 @@ UDPDiscoveryKeepaliveInterval = 9
 UDPDiscoveryInterval = 2
 UDPDiscoveryTimeout = 3
 UDPInfoInterval = 5
-UDPRcvBuf = 1048576
-UDPSndBuf = 1048576
+UDPRcvBuf = 104857600
+UDPSndBuf = 104857600
 # 搜索 UPnP-IGD，管理维护 tinc 的端口映射
 # udponly 只维护 udp 端口
 # yes | udponly | no
@@ -346,8 +346,8 @@ IPV4_ADDR="${PRIVATE_IPV4}"
 IPV6_ADDR="${PRIVATE_IPV6}"
 
 # 接口
-ip -4 link set \${INTERFACE} up mtu 1300 txqlen 1500
-ip -6 link set \${INTERFACE} up mtu 1300 txqlen 1500
+ip -4 link set \${INTERFACE} up mtu 8900 txqlen 1500
+ip -6 link set \${INTERFACE} up mtu 8900 txqlen 1500
 
 # 本机地址
 ip -4 addr add \${IPV4_ADDR}/${PRIVATE_IPV4_MASK} dev \${INTERFACE}
