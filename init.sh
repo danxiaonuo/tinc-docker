@@ -18,7 +18,7 @@ Name = ${NODE}
 # 网卡名称
 Interface = ${NETNAME}
 # Mode 有三种模式，分别是<router|switch|hub> (router) ,相对应我们平时使用到的路由、交换机、集线器 (默认模式 router)
-Mode = router 
+Mode = ${MODE}
 # 影响监听和外部 sockets 包, any 会根据操作系统进行创建 ipv4 和 ipv6
 # ipv4 | ipv6 | any
 AddressFamily = any
@@ -222,7 +222,7 @@ Name = ${NODE}
 # 网卡名称
 Interface = ${NETNAME}
 # Mode 有三种模式，分别是<router|switch|hub> (router) ,相对应我们平时使用到的路由、交换机、集线器 (默认模式 router)
-Mode = router 
+Mode = ${MODE}
 # 影响监听和外部 sockets 包, any 会根据操作系统进行创建 ipv4 和 ipv6
 # ipv4 | ipv6 | any
 AddressFamily = any
