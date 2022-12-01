@@ -36,6 +36,8 @@ services:
     environment:
       # 选择服务端与客户端(server or client)
       - RUNMODE=server
+      # Mode 有三种模式,分别是<router|switch|hub> (router) ,相对应我们平时使用到的路由、交换机、集线器 (默认模式 router)
+      - MODE=switch
       # 节点名称
       - NODE=server01
       # 网络接口名称
